@@ -1,0 +1,63 @@
+/******************************************************************************
+ *  Nafn    : Árdís Eyja Kjartansdóttir
+ *  T-póstur: aek25@hi.is
+ *  Lýsing  : Verkefni 2, Viðmótsforritun, Ludo
+ *****************************************************************************/
+
+/* Teningahliðar: */
+
+.one{
+    -fx-background-image: url("myndir/one.png");
+    -fx-background-size: cover;
+}
+
+.two{
+    -fx-background-image: url("myndir/two.png");
+    -fx-background-size: cover;
+}
+
+.three{
+    -fx-background-image: url("myndir/three.png");
+    -fx-background-size: cover;
+}
+
+.four{
+    -fx-background-image: url("myndir/four.png");
+    -fx-background-size: cover;
+}
+
+.five{
+    -fx-background-image: url("myndir/five.png");
+    -fx-background-size: cover;
+}
+
+.six{
+    -fx-background-image: url("myndir/six.png");
+    -fx-background-size: cover;
+}
+
+/* Leikmenn: */
+
+.leikmadurRaudur{
+    -fx-background-image: url("myndir/chess_pawn_red.png");
+    -fx-background-size: cover;
+}
+
+.leikmadurBlar{
+    -fx-background-image: url("myndir/chess_pawn_blue.png");
+    -fx-background-size: cover;
+}
+
+/*Borð*/
+
+.start{
+    -fx-background-color: #f6a2d9;
+}
+
+.finish{
+    -fx-background-color: #9ff39f;
+}
+
+.border{
+    -fx-border-color: black;
+}
