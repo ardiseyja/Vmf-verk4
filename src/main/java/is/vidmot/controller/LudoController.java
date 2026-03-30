@@ -33,13 +33,18 @@ public class LudoController {
     public Button fxTeningur;
 
     @FXML
-    public Label fxStada;
+    public Label fxStada; //nafn leikmanns sem á að gera
+
+    //Nýtt:
+    //stigatafla:
+    @FXML
+    public Label fxTolvaStig;
 
     @FXML
-    public Label fxUpplysingar;
+    public Label fxLeikmadurStig;
 
     @FXML
-    public Button fxNyrLeikur;
+    public Label fxLeikmadur;
 
     private final Map<Reitur, StackPane> vidmotLeid = new HashMap<>();
 
@@ -68,7 +73,7 @@ public class LudoController {
      * Frumstilling á viðmótshlutum og byrjar leikinn
      */
     public void initialize() throws IOException {
-        buaTilLeid();
+       // buaTilLeid();
         bindaTening();
         bindaReiti();
         bindaHnappa();
@@ -144,7 +149,7 @@ public class LudoController {
      * ef leik er lokið er teningurinn óvirkur
      */
     private void bindaHnappa(){
-        fxNyrLeikur.disableProperty().bind(ludo.iGangi());
+        //fxNyrLeikur.disableProperty().bind(ludo.iGangi());
         fxTeningur.disableProperty().bind(ludo.erLokid());
     }
 
@@ -155,14 +160,10 @@ public class LudoController {
      * Leiðbeiningar: kasta tening eða ýta á nýr leikur
      */
     private void bindaSkilabod(){
-        fxStada.textProperty().bind(
+        fxStada.setText("Svartur");
+        /*fxStada.textProperty().bind(
                 Bindings.when(ludo.erLokid())
                         .then(Bindings.concat(LEIK_LOKID, ludo.naestiLeikmadurProp(), VANN))
-                        .otherwise(Bindings.concat(LEIKUR_I_GANGI, ludo.naestiLeikmadurProp(), GERIR)));
-
-        fxUpplysingar.textProperty().bind(
-                Bindings.when(ludo.iGangi())
-                        .then(KASTA)
-                        .otherwise(NYR_LEIKUR));
+                        .otherwise(Bindings.concat(LEIKUR_I_GANGI, ludo.naestiLeikmadurProp(), GERIR)));*/
     }
 }
