@@ -6,7 +6,7 @@ package is.vidmot.switcher;
  * viðbætur fyrir Ferdaplan verkefni
  */
 public enum View {
-    ADAL("/is/vidmot/ludo-view.fxml"),
+    ADAL("/is/vidmot/upphaf-view.fxml"),
     FERD("/is/vidmot/ludo-view.fxml");
 
 
