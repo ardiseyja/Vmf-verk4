@@ -18,12 +18,7 @@ import java.util.Map;
 
 public class LudoController {
     //fastar:
-    public static final String LEIK_LOKID = "Leik lokið, Leikmaður ";
-    public static final String VANN = " vann!";
-    public static final String LEIKUR_I_GANGI= "Leikur í gangi ";
-    public static final String GERIR = " gerir";
-    public static final String KASTA = "Kastaðu teningnum til að gera";
-    public static final String NYR_LEIKUR = "Ýttu á 'Nýr leikur' til að spila aftur";
+    public final String url = "CSS/myndir/"; //ef notað verpur imageview fyrir leikmenn í stað stackpane
 
     //tilviksbreytur:
     @FXML
@@ -62,21 +57,12 @@ public class LudoController {
     }
 
     /**
-     * Handler nýr leikur takki
-     * @param actionEvent ónotað
-     */
-    public void onNyrLeikur(ActionEvent actionEvent) {
-        ludo.nyrLeikur();
-    }
-
-    /**
      * Frumstilling á viðmótshlutum og byrjar leikinn
      */
     public void initialize() throws IOException {
-       // buaTilLeid();
+        buaTilLeid();
         bindaTening();
         bindaReiti();
-        bindaHnappa();
         bindaSkilabod();
     }
 
@@ -92,15 +78,38 @@ public class LudoController {
      */
     private void buaTilLeid() throws IOException{
         List<Reitur> leid = ludo.getLeid();
-
+        int i = 0;
         for(Reitur reitur: leid){
             StackPane vidmotsReitur = loadReitur();
-            vidmotsReitur.getStyleClass().add("border"); //útlínur settar á reiti
+            vidmotsReitur.getStyleClass().add("border");
+
+            if(i%2==0 && i!=0){ //bæta við bakgrunnslit á annanhvern reit
+                vidmotsReitur.getStyleClass().add("reitur");
+            }
+
+            byrjunEndir(vidmotsReitur, reitur);
+
             fxLeikBord.add(vidmotsReitur, reitur.getDalkurProp().intValue(), reitur.getRodProp().intValue());
             vidmotLeid.put(reitur, vidmotsReitur);
+            i++;
         }
     }
 
+    /**
+     * Setur bakgrunnsmynd á byrjunar og endareit
+     * @param vidmotsReitur StackPane
+     * @param reitur úr vinnslu
+     */
+    private void byrjunEndir(StackPane vidmotsReitur, Reitur reitur){
+        int dalkur = reitur.getDalkurProp().intValue();
+        int rod = reitur.getRodProp().intValue();
+        if(rod==3 && dalkur==0){
+            vidmotsReitur.getStyleClass().add("byrjun");
+        }
+        if(rod==4 && dalkur==4){
+            vidmotsReitur.getStyleClass().add("mark");
+        }
+    }
     /**
      * Hjálparaðferð sem býr til nýtt StackPane
      * @return StackPane viðmótsreit
@@ -143,27 +152,15 @@ public class LudoController {
         });
     }
 
-    /**
-     * Bindur hnappana við ástandið á leiknum,
-     * ef leikur er í gangi er nýr leikur takkinn óvirkur,
-     * ef leik er lokið er teningurinn óvirkur
-     */
-    private void bindaHnappa(){
-        //fxNyrLeikur.disableProperty().bind(ludo.iGangi());
-        fxTeningur.disableProperty().bind(ludo.erLokid());
+    private void bindaLeikmenn(){
+        //finna gamla og nýja reit og uppfæra imageview eftir því
     }
 
     /**
      * Bindur Label við stöðu leiksins frá vinnslunni,
-     * birtir skilaboð í samræmi við leikinn
-     * Skilaboð um hver á leik, sigurvegari,
-     * Leiðbeiningar: kasta tening eða ýta á nýr leikur
+     * Skilaboð um hver á leik
      */
     private void bindaSkilabod(){
-        fxStada.setText("Svartur");
-        /*fxStada.textProperty().bind(
-                Bindings.when(ludo.erLokid())
-                        .then(Bindings.concat(LEIK_LOKID, ludo.naestiLeikmadurProp(), VANN))
-                        .otherwise(Bindings.concat(LEIKUR_I_GANGI, ludo.naestiLeikmadurProp(), GERIR)));*/
+        fxStada.textProperty().bind(ludo.naestiLeikmadurProp());
     }
 }

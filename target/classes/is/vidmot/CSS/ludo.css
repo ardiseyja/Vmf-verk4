@@ -53,6 +53,25 @@
     -fx-background-color: #9ff39f;
 }
 
+.reitur{
+    -fx-background-color: #dddddd;
+}
+
 .border{
+    -fx-border-width: 1px;
     -fx-border-color: black;
+}
+.button{
+    -fx-border-width: 1px;
+    -fx-border-color: black;
+}
+
+.byrjun{
+    -fx-background-image: url("myndir/byrja.png");
+    -fx-background-size: cover;
+}
+
+.mark{
+    -fx-background-image: url("myndir/mark.png");
+    -fx-background-size: cover;
 }
