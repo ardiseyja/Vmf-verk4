@@ -1,2 +1,5 @@
-is\vidmot\LudoController.class
+is\vidmot\controller\GognInterface.class
 is\vidmot\LudoApp.class
+is\vidmot\switcher\ViewSwitcher.class
+is\vidmot\switcher\View.class
+is\vidmot\controller\LudoController.class

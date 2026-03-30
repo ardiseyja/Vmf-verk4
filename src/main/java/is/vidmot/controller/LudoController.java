@@ -1,4 +1,4 @@
-package is.vidmot;
+package is.vidmot.controller;
 
 import is.vinnsla.Ludo;
 import is.vinnsla.Reitur;
@@ -15,11 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/******************************************************************************
- *  Nafn    : Árdís Eyja Kjartansdóttir
- *  T-póstur: aek25@hi.is
- *  Lýsing  : Verkefni 2, Viðmótsforritun, Lúdó
- *****************************************************************************/
 
 public class LudoController {
     //fastar:
@@ -107,7 +102,7 @@ public class LudoController {
      * @throws IOException
      */
     private StackPane loadReitur() throws IOException{
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("reitur-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(LudoController.class.getResource("/is/vidmot/reitur-view.fxml"));
         StackPane vidmotsReitur = fxmlLoader.load();
         return vidmotsReitur;
     }

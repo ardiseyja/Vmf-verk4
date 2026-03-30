@@ -5,11 +5,6 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import java.util.ArrayList;
 
-/******************************************************************************
- *  Nafn    : Árdís Eyja Kjartansdóttir
- *  T-póstur: aek25@hi.is
- *  Lýsing  : Verkefni 2, Viðmótsforritun, Lúdó
- *****************************************************************************/
 
 /**
  * Lúdó leikur, vinnsluklasinn sem viðmótið talar við

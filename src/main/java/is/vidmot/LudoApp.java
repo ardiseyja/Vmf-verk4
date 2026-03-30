@@ -1,14 +1,10 @@
 package is.vidmot;
 
-import javafx.fxml.FXMLLoader;
+import is.vidmot.switcher.View;
+import is.vidmot.switcher.ViewSwitcher;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
-/******************************************************************************
- *  Nafn    : Árdís Eyja Kjartansdóttir
- *  T-póstur: aek25@hi.is
- *  Lýsing  : Verkefni 2, Viðmótsforritun, Ludo
- *****************************************************************************/
 
 public class LudoApp extends javafx.application.Application {
     /**
@@ -18,8 +14,10 @@ public class LudoApp extends javafx.application.Application {
      */
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(LudoApp.class.getResource("ludo-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(),537,576);
+        var scene = new Scene(new Pane());
+        ViewSwitcher.setScene(scene);
+        ViewSwitcher.switchTo(View.ADAL, true, null);
+
         stage.setTitle("Ludo");
         stage.setScene(scene);
         stage.show();

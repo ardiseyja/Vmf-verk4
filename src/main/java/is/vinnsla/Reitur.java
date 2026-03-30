@@ -2,11 +2,6 @@ package is.vinnsla;
 
 import javafx.beans.property.SimpleIntegerProperty;
 
-/******************************************************************************
- *  Nafn    : Árdís Eyja Kjartansdóttir
- *  T-póstur: aek25@hi.is
- *  Lýsing  : Verkefni 2, Viðmótsforritun, Lúdó
- *****************************************************************************/
 
 /**
  * Klasi sem geymir eiginleika reits, röð og dálk

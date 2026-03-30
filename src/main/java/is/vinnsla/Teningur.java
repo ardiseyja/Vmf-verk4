@@ -4,12 +4,6 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import java.util.Random;
 
-/******************************************************************************
- *  Nafn    : Árdís Eyja Kjartansdóttir
- *  T-póstur: aek25@hi.is
- *  Lýsing  : Verkefni 2, Viðmótsforritun, Lúdó
- *****************************************************************************/
-
 /**
  * Klasi sem geymir eiginleika tenings
  */
