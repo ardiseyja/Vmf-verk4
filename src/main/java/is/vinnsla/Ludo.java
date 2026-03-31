@@ -13,8 +13,8 @@ public class Ludo {
     //Index inn í fylki, næsti leikmaður sem á að gera
     private int naesti = 0;
 
-    //Hæsta gildi, index á leiðinni
-    private final int MAX = 15;
+    //Hæsta gildi, index á leiðinni, lengd leiðar -1
+    private final int MAX = 35;
 
     //Leikmenn
     private final Leikmadur[] leikmenn = {new Leikmadur("Rauður"), new Leikmadur("Blár")};
@@ -42,17 +42,36 @@ public class Ludo {
      * býr til lúdó-leiðina
      */
     public Ludo(){
-        for(int rod = 4; rod>=0; rod--) {
-            leid.add(new Reitur(rod, 0));
+        //ný leið:
+        for(int dalkur = 0; dalkur<4;dalkur++){
+            leid.add(new Reitur(3,dalkur));
         }
-        for(int dalkur = 1; dalkur<5; dalkur++) {
-            leid.add(new Reitur(0, dalkur));
+        for(int rod=2; rod>=0;rod--){
+            leid.add(new Reitur(rod,3));
         }
-        for(int rod = 1; rod<5; rod++) {
-            leid.add(new Reitur(rod, 4));
+        leid.add(new Reitur(0,4));
+        for(int rod = 0; rod<4; rod++){
+            leid.add(new Reitur(rod, 5));
         }
-        for(int dalkur = 3; dalkur>0; dalkur--) {
-            leid.add(new Reitur(4, dalkur));
+        for(int dalkur = 6; dalkur<9; dalkur++){
+            leid.add(new Reitur(3,dalkur));
+        }
+        leid.add(new Reitur(4,8));
+        for(int dalkur = 8;dalkur>4;dalkur--){
+            leid.add(new Reitur(5,dalkur));
+        }
+        for(int rod = 6; rod<9;rod++){
+            leid.add(new Reitur(rod, 5));
+        }
+        leid.add(new Reitur(8,4));
+        for(int rod=8;rod>4;rod--){
+            leid.add(new Reitur(rod, 3));
+        }
+        for(int dalkur=2; dalkur>=0;dalkur--){
+            leid.add(new Reitur(5, dalkur));
+        }
+        for(int dalkur = 0; dalkur<5; dalkur++){
+            leid.add(new Reitur(4,dalkur));
         }
     }
 

@@ -75,7 +75,7 @@ public class UpphafsController {
 //            System.out.println("Selected string: " + selectedString);
 //        }
         selectedString = fxVeljaLit.getSelectionModel().getSelectedItem();
-        
+
         System.out.println(selectedString);
         if(Objects.equals(selectedString, "Gulur")) {
             return "leikmadurGulur";
