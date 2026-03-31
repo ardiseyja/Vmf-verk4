@@ -43,6 +43,31 @@
     -fx-background-size: cover;
 }
 
+.leikmadurGulur{
+    -fx-background-image: url("myndir/chess_pawn_yellow.png");
+    -fx-background-size: cover;
+}
+
+.leikmadurSvartur{
+    -fx-background-image: url("myndir/chess_pawn_black.png");
+    -fx-background-size: cover;
+}
+
+.leikmadurGraenn{
+    -fx-background-image: url("myndir/chess_pawn_green.png");
+    -fx-background-size: cover;
+}
+
+.leikmadurAppelsinu{
+    -fx-background-image: url("myndir/chess_pawn_orange.png");
+    -fx-background-size: cover;
+}
+
+.leikmadurFjolublar{
+    -fx-background-image: url("myndir/chess_pawn_purple.png");
+    -fx-background-size: cover;
+}
+
 /*Borð*/
 
 .start{

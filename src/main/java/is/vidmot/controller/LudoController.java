@@ -46,6 +46,8 @@ public class LudoController {
     //vinnslan:
     private final Ludo ludo = new Ludo();
 
+    private final UpphafsController upphafs = new UpphafsController();
+
 
     //Handlerar:
     /**
@@ -123,7 +125,8 @@ public class LudoController {
      * er vaktaður í gegnum index leikmanns
      */
     private void bindaReiti(){
-        String[] leikmadurStill = {"leikmadurRaudur", "leikmadurBlar"};
+        String lit = upphafs.valinnLitur();
+        String[] leikmadurStill = {lit, "leikmadurSvartur"};
 
         //Rautt peð:
         ludo.getLeikmadur(0).getReiturProp().addListener((obs, gamlaGildi, nyttGildi) -> {
