@@ -2,7 +2,6 @@ package is.vidmot.controller;
 
 import is.vinnsla.Ludo;
 import is.vinnsla.Reitur;
-import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,13 +16,6 @@ import java.util.Map;
 
 
 public class LudoController {
-    //fastar:
-    public static final String LEIK_LOKID = "Leik lokið, Leikmaður ";
-    public static final String VANN = " vann!";
-    public static final String LEIKUR_I_GANGI= "Leikur í gangi ";
-    public static final String GERIR = " gerir";
-    public static final String KASTA = "Kastaðu teningnum til að gera";
-    public static final String NYR_LEIKUR = "Ýttu á 'Nýr leikur' til að spila aftur";
 
     //tilviksbreytur:
     @FXML
@@ -33,13 +25,17 @@ public class LudoController {
     public Button fxTeningur;
 
     @FXML
-    public Label fxStada;
+    public Label fxStada; //nafn leikmanns sem á að gera
+
+    //stigataflan
+    @FXML
+    public Label fxTolvaStig;
 
     @FXML
-    public Label fxUpplysingar;
+    public Label fxLeikmadurStig;
 
     @FXML
-    public Button fxNyrLeikur;
+    public Label fxLeikmadur;
 
     private final Map<Reitur, StackPane> vidmotLeid = new HashMap<>();
 
@@ -57,21 +53,12 @@ public class LudoController {
     }
 
     /**
-     * Handler nýr leikur takki
-     * @param actionEvent ónotað
-     */
-    public void onNyrLeikur(ActionEvent actionEvent) {
-        ludo.nyrLeikur();
-    }
-
-    /**
      * Frumstilling á viðmótshlutum og byrjar leikinn
      */
     public void initialize() throws IOException {
         buaTilLeid();
         bindaTening();
         bindaReiti();
-        bindaHnappa();
         bindaSkilabod();
     }
 
@@ -87,15 +74,57 @@ public class LudoController {
      */
     private void buaTilLeid() throws IOException{
         List<Reitur> leid = ludo.getLeid();
-
+        int i = 0;
         for(Reitur reitur: leid){
             StackPane vidmotsReitur = loadReitur();
-            vidmotsReitur.getStyleClass().add("border"); //útlínur settar á reiti
+            vidmotsReitur.getStyleClass().add("border");
+
+            if(i%2==0 && i!=0){
+                vidmotsReitur.getStyleClass().add("reitur");
+            }
+
+            byrjunEndir(vidmotsReitur, reitur);
+            aukaBorder(vidmotsReitur,reitur);
+
             fxLeikBord.add(vidmotsReitur, reitur.getDalkurProp().intValue(), reitur.getRodProp().intValue());
             vidmotLeid.put(reitur, vidmotsReitur);
+            i++;
         }
     }
 
+    /**
+     * Setur bakgrunnsmynd á byrjunar og endareit
+     * @param vidmotsReitur StackPane
+     * @param reitur úr vinnslu
+     */
+    private void byrjunEndir(StackPane vidmotsReitur, Reitur reitur){
+        int dalkur = reitur.getDalkurProp().intValue();
+        int rod = reitur.getRodProp().intValue();
+        if(rod==3 && dalkur==0){
+            vidmotsReitur.getStyleClass().add("byrjun");
+        }
+        if(rod==4 && dalkur==4){
+            vidmotsReitur.getStyleClass().add("mark");
+        }
+    }
+
+    /**
+     * Bætir þykkari útlínum á valda reiti til að gera leið skýrari
+     * @param vidmotsReitur
+     * @param reitur
+     */
+    private void aukaBorder(StackPane vidmotsReitur, Reitur reitur){
+        int dalkur = reitur.getDalkurProp().intValue();
+        int rod = reitur.getRodProp().intValue();
+
+        if(rod==4 && dalkur==0){
+            vidmotsReitur.getStyleClass().add("top");
+        }
+        if(rod==4 && (dalkur==1 || dalkur==2 || dalkur==3)){
+            vidmotsReitur.getStyleClass().add("top_bottom");
+        }
+    }
+    
     /**
      * Hjálparaðferð sem býr til nýtt StackPane
      * @return StackPane viðmótsreit
@@ -139,30 +168,10 @@ public class LudoController {
     }
 
     /**
-     * Bindur hnappana við ástandið á leiknum,
-     * ef leikur er í gangi er nýr leikur takkinn óvirkur,
-     * ef leik er lokið er teningurinn óvirkur
-     */
-    private void bindaHnappa(){
-        fxNyrLeikur.disableProperty().bind(ludo.iGangi());
-        fxTeningur.disableProperty().bind(ludo.erLokid());
-    }
-
-    /**
      * Bindur Label við stöðu leiksins frá vinnslunni,
-     * birtir skilaboð í samræmi við leikinn
-     * Skilaboð um hver á leik, sigurvegari,
-     * Leiðbeiningar: kasta tening eða ýta á nýr leikur
+     * Skilaboð um hver á leik
      */
     private void bindaSkilabod(){
-        fxStada.textProperty().bind(
-                Bindings.when(ludo.erLokid())
-                        .then(Bindings.concat(LEIK_LOKID, ludo.naestiLeikmadurProp(), VANN))
-                        .otherwise(Bindings.concat(LEIKUR_I_GANGI, ludo.naestiLeikmadurProp(), GERIR)));
-
-        fxUpplysingar.textProperty().bind(
-                Bindings.when(ludo.iGangi())
-                        .then(KASTA)
-                        .otherwise(NYR_LEIKUR));
+        fxStada.textProperty().bind(ludo.naestiLeikmadurProp());
     }
 }
