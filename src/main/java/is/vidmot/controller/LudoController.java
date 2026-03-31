@@ -2,7 +2,6 @@ package is.vidmot.controller;
 
 import is.vinnsla.Ludo;
 import is.vinnsla.Reitur;
-import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,8 +16,6 @@ import java.util.Map;
 
 
 public class LudoController {
-    //fastar:
-    public final String url = "CSS/myndir/"; //ef notað verpur imageview fyrir leikmenn í stað stackpane
 
     //tilviksbreytur:
     @FXML
@@ -30,8 +27,7 @@ public class LudoController {
     @FXML
     public Label fxStada; //nafn leikmanns sem á að gera
 
-    //Nýtt:
-    //stigatafla:
+    //stigataflan
     @FXML
     public Label fxTolvaStig;
 
@@ -83,11 +79,12 @@ public class LudoController {
             StackPane vidmotsReitur = loadReitur();
             vidmotsReitur.getStyleClass().add("border");
 
-            if(i%2==0 && i!=0){ //bæta við bakgrunnslit á annanhvern reit
+            if(i%2==0 && i!=0){
                 vidmotsReitur.getStyleClass().add("reitur");
             }
 
             byrjunEndir(vidmotsReitur, reitur);
+            aukaBorder(vidmotsReitur,reitur);
 
             fxLeikBord.add(vidmotsReitur, reitur.getDalkurProp().intValue(), reitur.getRodProp().intValue());
             vidmotLeid.put(reitur, vidmotsReitur);
@@ -110,6 +107,24 @@ public class LudoController {
             vidmotsReitur.getStyleClass().add("mark");
         }
     }
+
+    /**
+     * Bætir þykkari útlínum á valda reiti til að gera leið skýrari
+     * @param vidmotsReitur
+     * @param reitur
+     */
+    private void aukaBorder(StackPane vidmotsReitur, Reitur reitur){
+        int dalkur = reitur.getDalkurProp().intValue();
+        int rod = reitur.getRodProp().intValue();
+
+        if(rod==4 && dalkur==0){
+            vidmotsReitur.getStyleClass().add("top");
+        }
+        if(rod==4 && (dalkur==1 || dalkur==2 || dalkur==3)){
+            vidmotsReitur.getStyleClass().add("top_bottom");
+        }
+    }
+    
     /**
      * Hjálparaðferð sem býr til nýtt StackPane
      * @return StackPane viðmótsreit
@@ -150,10 +165,6 @@ public class LudoController {
             vidmotLeid.get(ludo.getReitur(gamlaGildi.intValue())).getStyleClass().remove(leikmadurStill[1]);
             vidmotLeid.get(ludo.getReitur(nyttGildi.intValue())).getStyleClass().add(leikmadurStill[1]);
         });
-    }
-
-    private void bindaLeikmenn(){
-        //finna gamla og nýja reit og uppfæra imageview eftir því
     }
 
     /**
