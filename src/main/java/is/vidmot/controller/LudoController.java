@@ -39,20 +39,26 @@ public class LudoController {
 
     private final Map<Reitur, StackPane> vidmotLeid = new HashMap<>();
 
-    //vinnslan:
-    private final Ludo ludo = new Ludo();
+    //Alert dialog:
     private final Tilkynning tilkynning = new Tilkynning();
 
+    //vinnslan:
+    private final Ludo ludo = new Ludo();
+
+
     //Handlerar:
+
     /**
-     * Handler fyrir að kasta tening
-     * @param actionEvent ónotað
+     * Handler fyrir tening
+     * Þegar teningi er kastað færist leikmaður skv teningi
+     * Ef leikmaður lendir á sama reit
+     * og andstæðingur er birtur upplýsinga dialog
+     * @param actionEvent
      */
     public void onTeningur(ActionEvent actionEvent) {
         ludo.leikaLeik();
         if(ludo.getSamiReitur().get()) {
-            System.out.println("Birta dialog");
-            tilkynning.birtaTilkynningu(((Node) actionEvent.getSource()).getScene().getWindow(), ludo.getLeikmadur().getNafn());
+            tilkynning.birtaTilkynningu(((Node) actionEvent.getSource()).getScene().getWindow(), ludo.getLeikmadur().getNafn(), ludo.getAndstaedingur().getNafn());
         }
     }
 

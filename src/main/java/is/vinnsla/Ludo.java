@@ -157,6 +157,13 @@ public class Ludo {
      */
     public SimpleBooleanProperty getSamiReitur(){ return samiReitur; }
 
+    /**
+     * Skilar andstæðingi núverandi leikmanns
+     * @return Leikmadur
+     */
+    public Leikmadur getAndstaedingur(){
+        return leikmenn[(naesti+1)%leikmenn.length];
+    }
 
     //Private hjálparaðferðir:
 
@@ -187,14 +194,6 @@ public class Ludo {
 
 
     /**
-     * Skilar andstæðingi núverandi leikmanns
-     * @return Leikmadur
-     */
-    private Leikmadur getAndstaedingur(){
-        return leikmenn[(naesti+1)%leikmenn.length];
-    }
-
-    /**
      * færir leikmann eftir að teningi,
      * færir andstæðing á byrjunarreit ef leikmaður lendir á sama reit
      * Skilar gildi um hvort leikur sé í gangi
@@ -207,7 +206,6 @@ public class Ludo {
             samiReitur.set(true);
             getAndstaedingur().setReitur(0);
         }
-
         return kominIMark();
     }
 
