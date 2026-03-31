@@ -5,8 +5,8 @@ import is.vinnsla.Reitur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import java.io.IOException;
@@ -41,7 +41,7 @@ public class LudoController {
 
     //vinnslan:
     private final Ludo ludo = new Ludo();
-
+    private final Tilkynning tilkynning = new Tilkynning();
 
     //Handlerar:
     /**
@@ -50,6 +50,10 @@ public class LudoController {
      */
     public void onTeningur(ActionEvent actionEvent) {
         ludo.leikaLeik();
+        if(ludo.getSamiReitur().get()) {
+            System.out.println("Birta dialog");
+            tilkynning.birtaTilkynningu(((Node) actionEvent.getSource()).getScene().getWindow(), ludo.getLeikmadur().getNafn());
+        }
     }
 
     /**
@@ -124,7 +128,7 @@ public class LudoController {
             vidmotsReitur.getStyleClass().add("top_bottom");
         }
     }
-    
+
     /**
      * Hjálparaðferð sem býr til nýtt StackPane
      * @return StackPane viðmótsreit

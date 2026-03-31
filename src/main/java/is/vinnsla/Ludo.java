@@ -1,6 +1,7 @@
 package is.vinnsla;
 
 import javafx.beans.binding.BooleanBinding;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import java.util.ArrayList;
@@ -24,6 +25,9 @@ public class Ludo {
 
     //Teningur
     private final Teningur teningur = new Teningur();
+
+    //Heldur utan um hvort leikmaður lenti á sama reit og andstæðingurinn
+    private SimpleBooleanProperty samiReitur = new SimpleBooleanProperty(false);
 
     //Hvaða leikmaður á að gera næst
     private final SimpleStringProperty naestiLeikmadur = new SimpleStringProperty(leikmenn[0].getNafn());
@@ -146,6 +150,13 @@ public class Ludo {
         return leid.get(index);
     }
 
+    /**
+     * Skilar boolean property um hvort leikmaður lenti á sama reit
+     * true ef leikmaður lenti á sama reit og andstæðingurinn
+     * @return property
+     */
+    public SimpleBooleanProperty getSamiReitur(){ return samiReitur; }
+
 
     //Private hjálparaðferðir:
 
@@ -191,8 +202,9 @@ public class Ludo {
      */
     private boolean faeraLeikmann(){
         getLeikmadur().faera(teningur.getTala(), MAX);
-
+        samiReitur.set(false);
         if(aSamaReit(getLeikmadur().getReitur())){
+            samiReitur.set(true);
             getAndstaedingur().setReitur(0);
         }
 

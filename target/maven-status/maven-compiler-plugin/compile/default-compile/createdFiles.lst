@@ -3,3 +3,4 @@ is\vidmot\LudoApp.class
 is\vidmot\switcher\ViewSwitcher.class
 is\vidmot\switcher\View.class
 is\vidmot\controller\LudoController.class
+is\vidmot\controller\Tilkynning.class
