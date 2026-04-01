@@ -1,15 +1,14 @@
 package is.vidmot.controller;
 
+import java.io.IOException;
+
 /******************************************************************************
- *  Nafn    : Ebba Þóra Hvannberg
- *  T-póstur: ebba@hi.is
- *
  *  Lýsing  : Interface sem leyfir að setja gögn
  *  Útfært af contollerum sem vilja hlaða inn gögnum í
  *  viðmótshluti
  *****************************************************************************/
-public interface GognInterface<T> {
+public interface GognInterface<String> {
 
-    public void setGogn(T data);
+    public void setGogn(String data) throws IOException;
 }
 

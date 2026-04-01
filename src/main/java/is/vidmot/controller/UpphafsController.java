@@ -9,7 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 
-import java.util.Objects;
+import java.io.IOException;
 
 public class UpphafsController {
 
@@ -21,20 +21,10 @@ public class UpphafsController {
     @FXML
     private ComboBox<String> fxVeljaLit;
 
-    ComboBox<String> veljaLit = new ComboBox<>();
-
-    String selectedString = "";
+    public String selectedString;
 
     public void initialize() {
         frumstillaLiti();
-        //String litur = fxVeljaLit.getValue();
-
-        //nota líkt þessu til að nota litinn sem er valinn til að setja lit á peð
-        // hlustum á breytingu á valinu og uppfærum myndina af dýrinu
-//        fxVeljaLit.getSelectionModel().selectedItemProperty()
-//                .addListener((obs, gamla, nyja) -> {
-//                    fxDyramynd.setImage(dyramyndir.get(nyja));
-//                });
     }
 
     private void frumstillaLiti() {
@@ -42,44 +32,22 @@ public class UpphafsController {
         fxVeljaLit.setItems(litirHeiti);
     }
 
+
     @FXML
-    private String onByrja(ActionEvent event) {
-        ViewSwitcher.switchTo(View.FERD, false, null);
+    private void onByrja(ActionEvent event) throws IOException {
         selectedString = fxVeljaLit.getSelectionModel().getSelectedItem();
-        if (selectedString != null) {
-            System.out.println("Selected string: " + selectedString);
+
+        if(selectedString == null) {
+            System.out.println("Ekkert valið");
         }
-        return selectedString;
+
+        ViewSwitcher.switchTo(View.FERD, false, selectedString);
     }
+
 
     @FXML
     private void onHverByrjar(ActionEvent event){
 
     }
 
-    public String valinnLitur() {
-        //String litur = fxVeljaLit.getValue();
-
-//        if(Objects.equals(litur, "Gulur")) {
-//            return "leikmadurGulur";
-//        }
-//        String x = "";
-//                fxVeljaLit.getSelectionModel().selectedItemProperty()
-//                .addListener((obs, gamla, nyja) -> {
-//                   return nyja;
-//                });
-//        String litur = veljaLit.getValue();
-//        System.out.println(litur);
-//        String selectedString = fxVeljaLit.getSelectionModel().getSelectedItem();
-//        if (selectedString != null) {
-//            System.out.println("Selected string: " + selectedString);
-//        }
-        selectedString = fxVeljaLit.getSelectionModel().getSelectedItem();
-
-        System.out.println(selectedString);
-        if(Objects.equals(selectedString, "Gulur")) {
-            return "leikmadurGulur";
-        }
-        return "leikmadurRaudur";
-    }
 }
