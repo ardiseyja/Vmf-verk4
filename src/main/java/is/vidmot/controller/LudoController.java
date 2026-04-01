@@ -14,7 +14,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * Controller fyrir leikborðið
+ */
 public class LudoController {
 
     //tilviksbreytur:
@@ -27,7 +29,7 @@ public class LudoController {
     @FXML
     public Label fxStada; //nafn leikmanns sem á að gera
 
-    //stigataflan
+    //Stigataflan:
     @FXML
     public Label fxTolvaStig;
 
@@ -39,9 +41,8 @@ public class LudoController {
 
     private final Map<Reitur, StackPane> vidmotLeid = new HashMap<>();
 
-    //Alert dialog:
+    //Dialogar:
     private final Tilkynning tilkynning = new Tilkynning();
-
     private final SigurvegariDialog sigurvegariDialog = new SigurvegariDialog();
 
     //vinnslan:
@@ -55,6 +56,7 @@ public class LudoController {
      * Þegar teningi er kastað færist leikmaður skv teningi
      * Ef leikmaður lendir á sama reit
      * og andstæðingur er birtur upplýsinga dialog
+     * Þegar leik er lokið birtist viðeigandi dialog
      * @param actionEvent
      */
     public void onTeningur(ActionEvent actionEvent) {

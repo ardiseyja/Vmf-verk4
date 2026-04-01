@@ -43,19 +43,7 @@
     -fx-background-size: cover;
 }
 
-/*Borð*/
-
-.start{
-    -fx-background-color: #f6a2d9;
-}
-
-.finish{
-    -fx-background-color: #9ff39f;
-}
-
-.reitur{
-    -fx-background-color: #dddddd;
-}
+/*Rammar*/
 
 .border{
     -fx-border-width: 1px;
@@ -77,6 +65,12 @@
     -fx-border-color: black;
 }
 
+/*Reitir*/
+
+.reitur{
+    -fx-background-color: #dddddd;
+}
+
 .byrjun{
     -fx-background-image: url("myndir/byrja.png");
     -fx-background-size: cover;
@@ -87,8 +81,9 @@
     -fx-background-size: cover;
 }
 
+/*Útlit fyrir takka í dialog*/
+
 .takki{
-    -fx-alignment: center;
     -fx-padding: 10px 15px 10px 15px;
     -fx-font-size: 20px;
 }
