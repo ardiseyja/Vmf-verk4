@@ -10,9 +10,9 @@ import javafx.stage.Window;
  * notenda að leikmaður hafi verið sendur aftur á byrjunarreit
  */
 public class Tilkynning {
-    public static final String TILBAKA = " fer aftur á byrjunarreit";
-    public static final String REITUR = " lenti á reit andstæðings";
-    public static final String BYRJUNARREITUR = "Aftur á byrjunarreit";
+    private static final String TILBAKA = " fer aftur á byrjunarreit";
+    private static final String REITUR = " lenti á reit andstæðings";
+    private static final String BYRJUNARREITUR = "Aftur á byrjunarreit";
     private static final String ILAGI ="Í lagi";
 
     /**

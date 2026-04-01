@@ -42,6 +42,8 @@ public class LudoController {
     //Alert dialog:
     private final Tilkynning tilkynning = new Tilkynning();
 
+    private final SigurvegariDialog sigurvegariDialog = new SigurvegariDialog();
+
     //vinnslan:
     private final Ludo ludo = new Ludo();
 
@@ -59,6 +61,9 @@ public class LudoController {
         ludo.leikaLeik();
         if(ludo.getSamiReitur().get()) {
             tilkynning.birtaTilkynningu(((Node) actionEvent.getSource()).getScene().getWindow(), ludo.getLeikmadur().getNafn(), ludo.getAndstaedingur().getNafn());
+        }
+        if(ludo.erLokid().get()){
+            sigurvegariDialog.birtaSigurvegara(((Node) actionEvent.getSource()).getScene().getWindow(), ludo, ludo.getLeikmadur().getNafn());
         }
     }
 
