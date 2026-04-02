@@ -14,10 +14,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 /**
  * Controller fyrir leikborðið
  */
-public class LudoController {
+public class LudoController implements GognInterface {
+
 
     //tilviksbreytur:
     @FXML
@@ -39,6 +41,8 @@ public class LudoController {
     @FXML
     public Label fxLeikmadur;
 
+    public String litur;
+
     private final Map<Reitur, StackPane> vidmotLeid = new HashMap<>();
 
     //Dialogar:
@@ -46,7 +50,25 @@ public class LudoController {
     private final SigurvegariDialog sigurvegariDialog = new SigurvegariDialog();
 
     //vinnslan:
-    private final Ludo ludo = new Ludo();
+    private Ludo ludo = new Ludo(0);
+
+
+    /**
+     * Setja gögn, loada binding, setja lit sem var í fellivalmynd og byrjunar leikmann. Frumstilling og byrja leikinn.
+     * @param f
+     * @throws IOException
+     */
+    public void setGogn(Object f, int i) throws IOException {
+        ludo = new Ludo(i);
+        this.litur = f.toString();
+        fxLeikmadur.setText(litur);
+        ludo.setLeikmadur1(litur);
+
+        buaTilLeid();
+        bindaTening();
+        bindaReiti();
+        bindaSkilabod();
+    }
 
 
     //Handlerar:
@@ -67,16 +89,6 @@ public class LudoController {
         if(ludo.erLokid().get()){
             sigurvegariDialog.birtaSigurvegara(((Node) actionEvent.getSource()).getScene().getWindow(), ludo, ludo.getLeikmadur().getNafn());
         }
-    }
-
-    /**
-     * Frumstilling á viðmótshlutum og byrjar leikinn
-     */
-    public void initialize() throws IOException {
-        buaTilLeid();
-        bindaTening();
-        bindaReiti();
-        bindaSkilabod();
     }
 
 
@@ -165,19 +177,45 @@ public class LudoController {
     }
 
     /**
+     * Sæka lit sem var valinn í fellivalmynd og  skila css string til að binda við peð.
+     * @return
+     */
+    private String litLeikmanns() {
+        if(litur == "Gulur") {
+            return "leikmadurGulur";
+        }
+        if(litur == "Rauður") {
+            return "leikmadurRaudur";
+        }
+        if(litur == "Grænn") {
+            return "leikmadurGraenn";
+        }
+        if(litur == "Blár") {
+            return "leikmadurBlar";
+        }
+        if(litur == "Fjólublár") {
+            return "leikmadurFjolublar";
+        }
+        if(litur == "Appelsínugulur") {
+            return "leikmadurAppelsinu";
+        }
+        return null;
+    }
+
+    /**
      * Fyrir hvern leikmann, uppfærir mynd á viðmótsreit í samræmi við nýjan reit leikmanns sem
      * er vaktaður í gegnum index leikmanns
      */
     private void bindaReiti(){
-        String[] leikmadurStill = {"leikmadurRaudur", "leikmadurBlar"};
+        String[] leikmadurStill = {litLeikmanns(), "leikmadurSvartur"};
 
-        //Rautt peð:
+        //Peð leikmanns:
         ludo.getLeikmadur(0).getReiturProp().addListener((obs, gamlaGildi, nyttGildi) -> {
             vidmotLeid.get(ludo.getReitur(gamlaGildi.intValue())).getStyleClass().remove(leikmadurStill[0]);
             vidmotLeid.get(ludo.getReitur(nyttGildi.intValue())).getStyleClass().add(leikmadurStill[0]);
         });
 
-        //Blátt peð:
+        //Peð tölvu:
         ludo.getLeikmadur(1).getReiturProp().addListener((obs, gamlaGildi, nyttGildi) -> {
             vidmotLeid.get(ludo.getReitur(gamlaGildi.intValue())).getStyleClass().remove(leikmadurStill[1]);
             vidmotLeid.get(ludo.getReitur(nyttGildi.intValue())).getStyleClass().add(leikmadurStill[1]);
@@ -191,4 +229,5 @@ public class LudoController {
     private void bindaSkilabod(){
         fxStada.textProperty().bind(ludo.naestiLeikmadurProp());
     }
+
 }

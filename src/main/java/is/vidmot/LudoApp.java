@@ -16,7 +16,7 @@ public class LudoApp extends javafx.application.Application {
     public void start(Stage stage) throws Exception {
         var scene = new Scene(new Pane());
         ViewSwitcher.setScene(scene);
-        ViewSwitcher.switchTo(View.ADAL, true, null);
+        ViewSwitcher.switchTo(View.ADAL, true, null, 0);
 
         stage.setTitle("Ludo");
         stage.setScene(scene);

@@ -12,13 +12,14 @@ import java.util.ArrayList;
  */
 public class Ludo {
     //Index inn í fylki, næsti leikmaður sem á að gera
-    private int naesti = 0;
+    private int naesti;
 
     //Hæsta gildi, index á leiðinni, lengd leiðar -1
     private final int MAX = 35;
 
     //Leikmenn
-    private final Leikmadur[] leikmenn = {new Leikmadur("Rauður"), new Leikmadur("Blár")};
+    //Skoða betur með fyrri leikmann þegar hann á fyrsta leik, litur kemur ekki upp heldur birtist það sem stendur hér.
+    private final Leikmadur[] leikmenn = {new Leikmadur("Þú"), new Leikmadur("Svartur")};
 
     //Lúdóborð
     private final ArrayList<Reitur> leid =  new ArrayList<>();
@@ -30,7 +31,7 @@ public class Ludo {
     private SimpleBooleanProperty samiReitur = new SimpleBooleanProperty(false);
 
     //Hvaða leikmaður á að gera næst
-    private final SimpleStringProperty naestiLeikmadur = new SimpleStringProperty(leikmenn[0].getNafn());
+    private final SimpleStringProperty naestiLeikmadur;
 
     //Staða leiksins
     private final SimpleObjectProperty<Stada> stada = new SimpleObjectProperty<>(Stada.GANGI);
@@ -45,7 +46,7 @@ public class Ludo {
      * Smiður, býr til leið, þ.e.
      * býr til lúdó-leiðina
      */
-    public Ludo(){
+    public Ludo(int i){
         //ný leið:
         for(int dalkur = 0; dalkur<4;dalkur++){
             leid.add(new Reitur(3,dalkur));
@@ -77,6 +78,17 @@ public class Ludo {
         for(int dalkur = 0; dalkur<5; dalkur++){
             leid.add(new Reitur(4,dalkur));
         }
+        this.naesti = i;
+        this.naestiLeikmadur = new SimpleStringProperty(leikmenn[i].getNafn());
+    }
+
+
+    /**
+     * Tekur við lit úr LudoController og setur hann á fyrsta leikmann.
+     * @param x
+     */
+    public void setLeikmadur1(String x) {
+        leikmenn[0] = new Leikmadur(x);
     }
 
 
