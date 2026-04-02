@@ -5,8 +5,8 @@ import is.vinnsla.Reitur;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import java.io.IOException;
@@ -14,7 +14,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * Controller fyrir leikborðið
+ */
 public class LudoController {
 
     //tilviksbreytur:
@@ -27,7 +29,7 @@ public class LudoController {
     @FXML
     public Label fxStada; //nafn leikmanns sem á að gera
 
-    //stigataflan
+    //Stigataflan:
     @FXML
     public Label fxTolvaStig;
 
@@ -39,17 +41,32 @@ public class LudoController {
 
     private final Map<Reitur, StackPane> vidmotLeid = new HashMap<>();
 
+    //Dialogar:
+    private final Tilkynning tilkynning = new Tilkynning();
+    private final SigurvegariDialog sigurvegariDialog = new SigurvegariDialog();
+
     //vinnslan:
     private final Ludo ludo = new Ludo();
 
 
     //Handlerar:
+
     /**
-     * Handler fyrir að kasta tening
-     * @param actionEvent ónotað
+     * Handler fyrir tening
+     * Þegar teningi er kastað færist leikmaður skv teningi
+     * Ef leikmaður lendir á sama reit
+     * og andstæðingur er birtur upplýsinga dialog
+     * Þegar leik er lokið birtist viðeigandi dialog
+     * @param actionEvent
      */
     public void onTeningur(ActionEvent actionEvent) {
         ludo.leikaLeik();
+        if(ludo.getSamiReitur().get()) {
+            tilkynning.birtaTilkynningu(((Node) actionEvent.getSource()).getScene().getWindow(), ludo.getLeikmadur().getNafn(), ludo.getAndstaedingur().getNafn());
+        }
+        if(ludo.erLokid().get()){
+            sigurvegariDialog.birtaSigurvegara(((Node) actionEvent.getSource()).getScene().getWindow(), ludo, ludo.getLeikmadur().getNafn());
+        }
     }
 
     /**
@@ -124,7 +141,7 @@ public class LudoController {
             vidmotsReitur.getStyleClass().add("top_bottom");
         }
     }
-    
+
     /**
      * Hjálparaðferð sem býr til nýtt StackPane
      * @return StackPane viðmótsreit
