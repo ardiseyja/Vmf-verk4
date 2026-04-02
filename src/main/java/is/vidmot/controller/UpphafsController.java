@@ -38,10 +38,10 @@ public class UpphafsController {
         selectedString = fxVeljaLit.getSelectionModel().getSelectedItem();
 
         if(selectedString == null) {
-            System.out.println("Ekkert valið");
+            System.out.println("Enginn litur valinn");
         }
 
-        ViewSwitcher.switchTo(View.FERD, false, selectedString);
+        ViewSwitcher.switchTo(View.LUDO, false, selectedString);
     }
 
 

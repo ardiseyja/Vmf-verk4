@@ -51,14 +51,15 @@ public class LudoController implements GognInterface {
      */
     public void setGogn(Object f) throws IOException {
         this.litur = f.toString();
-        System.out.println("set f " + f);
-        System.out.println("set litur " + litur);
+        fxLeikmadur.setText(litur);
+        ludo.setLeikmadur1(litur);
 
         buaTilLeid();
         bindaTening();
         bindaReiti();
         bindaSkilabod();
     }
+
 
     //Handlerar:
     /**

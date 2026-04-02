@@ -1,8 +1,12 @@
 package is.vinnsla;
 
+import is.vidmot.controller.LudoController;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
+
 import java.util.ArrayList;
 
 
@@ -17,7 +21,7 @@ public class Ludo {
     private final int MAX = 35;
 
     //Leikmenn
-    private final Leikmadur[] leikmenn = {new Leikmadur("Rauður"), new Leikmadur("Blár")};
+    private final Leikmadur[] leikmenn = {new Leikmadur("Þú"), new Leikmadur("Svartur")};
 
     //Lúdóborð
     private final ArrayList<Reitur> leid =  new ArrayList<>();
@@ -73,6 +77,15 @@ public class Ludo {
         for(int dalkur = 0; dalkur<5; dalkur++){
             leid.add(new Reitur(4,dalkur));
         }
+    }
+
+
+    /**
+     * Tekur við lit úr LudoController og setur hann á fyrsta leikmann.
+     * @param x
+     */
+    public void setLeikmadur1(String x) {
+        leikmenn[0] = new Leikmadur(x);
     }
 
 
