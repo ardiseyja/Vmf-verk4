@@ -9,6 +9,8 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +31,9 @@ public class LudoController implements GognInterface {
 
     @FXML
     public Label fxStada; //nafn leikmanns sem á að gera
+
+    @FXML
+    public VBox fxUpplysingar;  //Vbox í neðra hægra horni borðisns
 
     //Stigataflan:
     @FXML
@@ -67,6 +72,7 @@ public class LudoController implements GognInterface {
         bindaReiti();
         bindaSkilabod();
         bindaStig();
+        bindaLit();
     }
 
 
@@ -230,8 +236,40 @@ public class LudoController implements GognInterface {
         fxStada.textProperty().bind(ludo.naestiLeikmadurProp());
     }
 
+    /**
+     * Bindir Label í stigatöflu við stig leikmanna frá vinnslunni
+     */
     private void bindaStig(){
         fxTolvaStig.textProperty().bind(ludo.getStigatafla().getStigTolvu());
         fxLeikmadurStig.textProperty().bind(ludo.getStigatafla().getStigLeikmanns());
+    }
+
+    /**
+     * Hlustar á hvaða leikmaður á næsta leik
+     * uppfærir bakgrunnslit skilaboða
+     */
+    private void bindaLit(){
+        ludo.naestiLeikmadurProp().addListener((obs, gamlaGildi, nyttGildi)->{
+            fxUpplysingar.getStyleClass().remove(bakgrunnslitur(gamlaGildi));
+            fxUpplysingar.getStyleClass().add(bakgrunnslitur(nyttGildi));
+        });
+    }
+
+    /**
+     * Tekur inn nafn næsta leikmanns og
+     * skilar css klasa fyrir bakgrunnslit skilaboða
+     * @param litur nafn leikmanns
+     * @return css klasa nafn
+     */
+    private String bakgrunnslitur(String litur){
+        return switch (litur) {
+            case "Gulur" -> "gulur";
+            case "Rauður" -> "raudur";
+            case "Grænn" -> "graenn";
+            case "Blár" -> "blar";
+            case "Fjólublár" -> "fjolublar";
+            case "Appelsínugulur" -> "appelsina";
+            default -> "svartur";
+        };
     }
 }
