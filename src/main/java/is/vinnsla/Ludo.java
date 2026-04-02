@@ -27,6 +27,9 @@ public class Ludo {
     //Teningur
     private final Teningur teningur = new Teningur();
 
+    //Stigatafla
+    private final Stigatafla stigatafla = new Stigatafla();
+
     //Heldur utan um hvort leikmaður lenti á sama reit og andstæðingurinn
     private SimpleBooleanProperty samiReitur = new SimpleBooleanProperty(false);
 
@@ -125,6 +128,14 @@ public class Ludo {
      */
     public Teningur getTeningur() {
         return teningur;
+    }
+
+    /**
+     * Skilar stigatöflu
+     * @return stigatafla
+     */
+    public Stigatafla getStigatafla(){
+        return stigatafla;
     }
 
     /**

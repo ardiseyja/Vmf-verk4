@@ -69,19 +69,6 @@
     -fx-background-size: cover;
 }
 
-/*Borð*/
-
-.start{
-    -fx-background-color: #f6a2d9;
-}
-
-.finish{
-    -fx-background-color: #9ff39f;
-}
-
-.reitur{
-    -fx-background-color: #dddddd;
-}
 
 /*Rammar*/
 

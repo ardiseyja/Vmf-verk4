@@ -20,7 +20,6 @@ import java.util.Map;
  */
 public class LudoController implements GognInterface {
 
-
     //tilviksbreytur:
     @FXML
     public GridPane fxLeikBord;
@@ -52,7 +51,6 @@ public class LudoController implements GognInterface {
     //vinnslan:
     private Ludo ludo = new Ludo(0);
 
-
     /**
      * Setja gögn, loada binding, setja lit sem var í fellivalmynd og byrjunar leikmann. Frumstilling og byrja leikinn.
      * @param f
@@ -68,6 +66,7 @@ public class LudoController implements GognInterface {
         bindaTening();
         bindaReiti();
         bindaSkilabod();
+        bindaStig();
     }
 
 
@@ -88,6 +87,7 @@ public class LudoController implements GognInterface {
         }
         if(ludo.erLokid().get()){
             sigurvegariDialog.birtaSigurvegara(((Node) actionEvent.getSource()).getScene().getWindow(), ludo, ludo.getLeikmadur().getNafn());
+            ludo.getStigatafla().uppfaeraStig(ludo.getLeikmadur());
         }
     }
 
@@ -230,4 +230,8 @@ public class LudoController implements GognInterface {
         fxStada.textProperty().bind(ludo.naestiLeikmadurProp());
     }
 
+    private void bindaStig(){
+        fxTolvaStig.textProperty().bind(ludo.getStigatafla().getStigTolvu());
+        fxLeikmadurStig.textProperty().bind(ludo.getStigatafla().getStigLeikmanns());
+    }
 }
