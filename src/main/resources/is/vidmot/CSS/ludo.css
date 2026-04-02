@@ -43,6 +43,7 @@
     -fx-background-size: cover;
 }
 
+
 .leikmadurGulur{
     -fx-background-image: url("myndir/chess_pawn_yellow.png");
     -fx-background-size: cover;
@@ -82,6 +83,8 @@
     -fx-background-color: #dddddd;
 }
 
+/*Rammar*/
+
 .border{
     -fx-border-width: 1px;
     -fx-border-color: black;
@@ -102,6 +105,12 @@
     -fx-border-color: black;
 }
 
+/*Reitir*/
+
+.reitur{
+    -fx-background-color: #dddddd;
+}
+
 .byrjun{
     -fx-background-image: url("myndir/byrja.png");
     -fx-background-size: cover;
@@ -110,4 +119,11 @@
 .mark{
     -fx-background-image: url("myndir/mark.png");
     -fx-background-size: cover;
+}
+
+/*Útlit fyrir takka í dialog*/
+
+.takki{
+    -fx-padding: 10px 15px 10px 15px;
+    -fx-font-size: 20px;
 }

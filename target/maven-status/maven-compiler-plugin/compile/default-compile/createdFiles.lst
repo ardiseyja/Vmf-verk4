@@ -1,5 +1,7 @@
 is/vidmot/switcher/View.class
+is/vidmot/controller/SigurvegariDialog.class
 is/vidmot/switcher/ViewSwitcher.class
 is/vidmot/controller/LudoController.class
 is/vidmot/controller/GognInterface.class
+is/vidmot/controller/Tilkynning.class
 is/vidmot/controller/UpphafsController.class
