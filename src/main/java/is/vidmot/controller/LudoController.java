@@ -42,7 +42,6 @@ public class LudoController implements GognInterface {
     private final Map<Reitur, StackPane> vidmotLeid = new HashMap<>();
 
     //vinnslan:
-    //Þessi hefur áhrif á hver byrjar, þarf að ná því sem var kastað í upphafs controller og setja það hér inn
     private Ludo ludo = new Ludo(0);
 
 

@@ -16,9 +16,8 @@ public class Ludo {
     //Hæsta gildi, index á leiðinni, lengd leiðar -1
     private final int MAX = 35;
 
-//    private int x;
-
     //Leikmenn
+    //Skoða betur með fyrri leikmann þegar hann á fyrsta leik, litur kemur ekki upp heldur birtist það sem stendur hér.
     private final Leikmadur[] leikmenn = {new Leikmadur("Þú"), new Leikmadur("Svartur")};
 
     //Lúdóborð
@@ -87,18 +86,6 @@ public class Ludo {
     public void setLeikmadur1(String x) {
         leikmenn[0] = new Leikmadur(x);
     }
-
-//    public void setNaestiUpphaf(int y) {
-//        this.x = y;
-//        System.out.println("setnaestiupphaf " + x);
-//        this.naesti = y;
-//        System.out.println(naesti);
-//    }
-//
-//    public int getNaestiUpphaf() {
-//        System.out.println("getnaestiupphaf " + naesti);
-//        return naesti;
-//    }
 
 
     //getters og setters:
@@ -195,19 +182,9 @@ public class Ludo {
      * Færir yfir á næsta leikmann
      */
     private void setNaesti(){
-        System.out.println("setnaesti núna " + naesti);
         naesti = (naesti+1)%leikmenn.length;
-        System.out.println("setnaesti næst " + naesti);
         naestiLeikmadur.set(leikmenn[naesti].getNafn());
     }
-
-//    public void setNaesti(int x){
-//        System.out.println("setnaesti með x " + x);
-//        this.naesti = x;
-//        System.out.println("prenta naesti í setnaesti með x " + naesti);
-//        naestiLeikmadur.set(leikmenn[naesti].getNafn());
-//        System.out.println("naestileikm setnaeist með x " + naestiLeikmadur);
-//    }
 
 
     /**
