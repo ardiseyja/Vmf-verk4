@@ -2,8 +2,6 @@ package is.vidmot.controller;
 
 import is.vidmot.switcher.View;
 import is.vidmot.switcher.ViewSwitcher;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,6 +14,7 @@ import java.util.Random;
 
 public class UpphafsController {
 
+    //Array fyrir liti í fellivalmynd, litir á peðum.
     private static final String[] litir = {"Gulur", "Rauður", "Grænn", "Blár", "Fjólublár", "Appelsínugulur"};
 
     @FXML
@@ -26,24 +25,37 @@ public class UpphafsController {
     @FXML
     private ComboBox<String> fxVeljaLit;
 
-    public String selectedString;
+    private String selectedString;
 
+    /**
+     * Breytur til að kasta upp á hver á að byrja.
+     */
+    private int byrja;
     private static final int MAX = 2;
-    private final IntegerProperty byrjaLeikmadur = new SimpleIntegerProperty(MAX);
     private final Random randomNum = new Random();
 
+    /**
+     * Ræsa upphafsskjáinn.
+     */
     public void initialize() {
         frumstillaLiti();
         fxHverByrjar.disableProperty().bind(fxVeljaLit.getSelectionModel().selectedItemProperty().isNull());
         fxByrja.setDisable(true);
     }
 
+    /**
+     * Setja liti í fellivalmynd.
+     */
     private void frumstillaLiti() {
         ObservableList<String> litirHeiti = FXCollections.observableArrayList(litir);
         fxVeljaLit.setItems(litirHeiti);
     }
 
-
+    /**
+     * Ýta á Byrja hnapp á upphafsskjá, skipta yfir í ludo skjá og senda gögn yfir í ludo controller.
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void onByrja(ActionEvent event) throws IOException {
         selectedString = fxVeljaLit.getSelectionModel().getSelectedItem();
@@ -52,13 +64,16 @@ public class UpphafsController {
             System.out.println("Enginn litur valinn");
         }
 
-        ViewSwitcher.switchTo(View.LUDO, false, selectedString);
+        ViewSwitcher.switchTo(View.LUDO, false, selectedString, byrja);
     }
 
-
+    /**
+     * Ýta á Hver Byrjar hnapp til að kasta upp á hver á að byrjar.
+     * @param event
+     */
     @FXML
     private void onHverByrjar(ActionEvent event){
-        int byrja = randomNum.nextInt(2);
+        this.byrja = randomNum.nextInt(2);
         String[] hverByrjarTexti = {fxVeljaLit.getSelectionModel().getSelectedItem() + " byrjar", "Svartur byrjar"};
         fxHverByrjar.setText(hverByrjarTexti[byrja]);
         fxHverByrjar.disableProperty().unbind();

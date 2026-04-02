@@ -42,14 +42,17 @@ public class LudoController implements GognInterface {
     private final Map<Reitur, StackPane> vidmotLeid = new HashMap<>();
 
     //vinnslan:
-    private final Ludo ludo = new Ludo();
+    //Þessi hefur áhrif á hver byrjar, þarf að ná því sem var kastað í upphafs controller og setja það hér inn
+    private Ludo ludo = new Ludo(0);
+
 
     /**
-     * Setja gögn, loada binding, setja lit sem var í fellivalmynd. Frumstilling og byrja leikinn.
+     * Setja gögn, loada binding, setja lit sem var í fellivalmynd og byrjunar leikmann. Frumstilling og byrja leikinn.
      * @param f
      * @throws IOException
      */
-    public void setGogn(Object f) throws IOException {
+    public void setGogn(Object f, int i) throws IOException {
+        ludo = new Ludo(i);
         this.litur = f.toString();
         fxLeikmadur.setText(litur);
         ludo.setLeikmadur1(litur);

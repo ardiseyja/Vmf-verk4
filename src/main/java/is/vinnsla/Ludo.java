@@ -1,12 +1,8 @@
 package is.vinnsla;
 
-import is.vidmot.controller.LudoController;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-
 import java.util.ArrayList;
 
 
@@ -15,10 +11,12 @@ import java.util.ArrayList;
  */
 public class Ludo {
     //Index inn í fylki, næsti leikmaður sem á að gera
-    private int naesti = 0;
+    private int naesti;
 
     //Hæsta gildi, index á leiðinni, lengd leiðar -1
     private final int MAX = 35;
+
+//    private int x;
 
     //Leikmenn
     private final Leikmadur[] leikmenn = {new Leikmadur("Þú"), new Leikmadur("Svartur")};
@@ -30,7 +28,7 @@ public class Ludo {
     private final Teningur teningur = new Teningur();
 
     //Hvaða leikmaður á að gera næst
-    private final SimpleStringProperty naestiLeikmadur = new SimpleStringProperty(leikmenn[0].getNafn());
+    private final SimpleStringProperty naestiLeikmadur;
 
     //Staða leiksins
     private final SimpleObjectProperty<Stada> stada = new SimpleObjectProperty<>(Stada.GANGI);
@@ -45,7 +43,7 @@ public class Ludo {
      * Smiður, býr til leið, þ.e.
      * býr til lúdó-leiðina
      */
-    public Ludo(){
+    public Ludo(int i){
         //ný leið:
         for(int dalkur = 0; dalkur<4;dalkur++){
             leid.add(new Reitur(3,dalkur));
@@ -77,6 +75,8 @@ public class Ludo {
         for(int dalkur = 0; dalkur<5; dalkur++){
             leid.add(new Reitur(4,dalkur));
         }
+        this.naesti = i;
+        this.naestiLeikmadur = new SimpleStringProperty(leikmenn[i].getNafn());
     }
 
 
@@ -87,6 +87,18 @@ public class Ludo {
     public void setLeikmadur1(String x) {
         leikmenn[0] = new Leikmadur(x);
     }
+
+//    public void setNaestiUpphaf(int y) {
+//        this.x = y;
+//        System.out.println("setnaestiupphaf " + x);
+//        this.naesti = y;
+//        System.out.println(naesti);
+//    }
+//
+//    public int getNaestiUpphaf() {
+//        System.out.println("getnaestiupphaf " + naesti);
+//        return naesti;
+//    }
 
 
     //getters og setters:
@@ -183,9 +195,19 @@ public class Ludo {
      * Færir yfir á næsta leikmann
      */
     private void setNaesti(){
+        System.out.println("setnaesti núna " + naesti);
         naesti = (naesti+1)%leikmenn.length;
+        System.out.println("setnaesti næst " + naesti);
         naestiLeikmadur.set(leikmenn[naesti].getNafn());
     }
+
+//    public void setNaesti(int x){
+//        System.out.println("setnaesti með x " + x);
+//        this.naesti = x;
+//        System.out.println("prenta naesti í setnaesti með x " + naesti);
+//        naestiLeikmadur.set(leikmenn[naesti].getNafn());
+//        System.out.println("naestileikm setnaeist með x " + naestiLeikmadur);
+//    }
 
 
     /**

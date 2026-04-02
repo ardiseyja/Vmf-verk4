@@ -9,6 +9,6 @@ import java.io.IOException;
  *****************************************************************************/
 public interface GognInterface<String> {
 
-    public void setGogn(String data) throws IOException;
+    public void setGogn(String data, int i) throws IOException;
 }
 

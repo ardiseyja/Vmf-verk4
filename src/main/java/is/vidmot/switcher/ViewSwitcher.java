@@ -39,7 +39,7 @@ public class ViewSwitcher {
      * @param view    rót viðmótstrésins
      */
         public static void  switchTo(View view) {
-            switchTo(view, false, null);
+            switchTo(view, false, null, 0);
     }
 
 
@@ -50,7 +50,7 @@ public class ViewSwitcher {
      * @param isCache á að nota skyndiminni
      */
     public static void  switchTo(View view, boolean isCache) {
-        switchTo(view, isCache, null);
+        switchTo(view, isCache, null, 0);
     }
 
     /**
@@ -60,7 +60,7 @@ public class ViewSwitcher {
      * @param isCache á að nota skyndiminni
      * @param hlutur gögnin sem á að setja inn í controllerinn
      */
-    public static void switchTo(View view, boolean isCache, Object hlutur) {
+    public static void switchTo(View view, boolean isCache, Object hlutur, int leikmadur) {
         if (scene == null) {
             System.out.println("No scene was set");
             return;
@@ -84,7 +84,7 @@ public class ViewSwitcher {
                 }
             }
             if (controller instanceof GognInterface) {
-                ((GognInterface) controller).setGogn(hlutur);
+                ((GognInterface) controller).setGogn(hlutur, leikmadur);
             }
             scene.setRoot(root);
         } catch (IOException e) {
