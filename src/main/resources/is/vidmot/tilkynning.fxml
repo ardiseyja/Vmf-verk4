@@ -19,7 +19,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="fxTilkynning" text="" wrapText="true">
+                  <Label fx:id="fxTilkynning" text="" wrapText="true" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>

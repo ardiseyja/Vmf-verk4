@@ -22,13 +22,16 @@ public class Ludo {
 
     //Leikmenn
     //Skoða betur með fyrri leikmann þegar hann á fyrsta leik, litur kemur ekki upp heldur birtist það sem stendur hér.
-    private final Leikmadur[] leikmenn = {new Leikmadur("Þú"), new Leikmadur("Svartur")};
+    private final Leikmadur[] leikmenn;
 
     //Lúdóborð
     private final ArrayList<Reitur> leid =  new ArrayList<>();
 
     //Teningur
     private final Teningur teningur = new Teningur();
+
+    //Stigatafla
+    private final Stigatafla stigatafla = new Stigatafla();
 
     //Heldur utan um hvort leikmaður lenti á sama reit og andstæðingurinn
     private SimpleBooleanProperty samiReitur = new SimpleBooleanProperty(false);
@@ -49,7 +52,8 @@ public class Ludo {
      * Smiður, býr til leið, þ.e.
      * býr til lúdó-leiðina
      */
-    public Ludo(int i){
+    public Ludo(int i, String litur){
+        leikmenn = new Leikmadur[] {new Leikmadur(litur), new Leikmadur("Svartur")};
         //ný leið:
         for(int dalkur = 0; dalkur<4;dalkur++){
             leid.add(new Reitur(3,dalkur));
@@ -91,7 +95,7 @@ public class Ludo {
      * Tekur við lit úr LudoController og setur hann á fyrsta leikmann.
      * @param x
      */
-    public void setLeikmadur1(String x) {
+    public void setLeikmadur1(String x) {   //mögulega óþarfa aðferð núna?
         leikmenn[0] = new Leikmadur(x);
     }
 
@@ -132,11 +136,19 @@ public class Ludo {
     }
 
     /**
+     * Skilar stigatöflu
+     * @return stigatafla
+     */
+    public Stigatafla getStigatafla(){
+        return stigatafla;
+    }
+
+    /**
      * Skilar property gildi sem
      * segir til um hvort leikurinn sé í gangi
      * @return property
      */
-    public BooleanBinding iGangi(){
+    public BooleanBinding iGangi(){     //mögulega óþarfa aðferð, aldrei notuð
         return stada.isEqualTo(Stada.GANGI);
     }
 

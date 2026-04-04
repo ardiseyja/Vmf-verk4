@@ -2,32 +2,32 @@
 /* Teningahliðar: */
 
 .one{
-    -fx-background-image: url("myndir/one.png");
+    -fx-background-image: url("myndir/dice_one.png");
     -fx-background-size: cover;
 }
 
 .two{
-    -fx-background-image: url("myndir/two.png");
+    -fx-background-image: url("myndir/dice_two.png");
     -fx-background-size: cover;
 }
 
 .three{
-    -fx-background-image: url("myndir/three.png");
+    -fx-background-image: url("myndir/dice_three.png");
     -fx-background-size: cover;
 }
 
 .four{
-    -fx-background-image: url("myndir/four.png");
+    -fx-background-image: url("myndir/dice_four.png");
     -fx-background-size: cover;
 }
 
 .five{
-    -fx-background-image: url("myndir/five.png");
+    -fx-background-image: url("myndir/dice_five.png");
     -fx-background-size: cover;
 }
 
 .six{
-    -fx-background-image: url("myndir/six.png");
+    -fx-background-image: url("myndir/dice_six.png");
     -fx-background-size: cover;
 }
 
@@ -42,7 +42,6 @@
     -fx-background-image: url("myndir/chess_pawn_blue.png");
     -fx-background-size: cover;
 }
-
 
 .leikmadurGulur{
     -fx-background-image: url("myndir/chess_pawn_yellow.png");
@@ -69,18 +68,48 @@
     -fx-background-size: cover;
 }
 
-/*Borð*/
+/*Bakgrunnslitir fyrir stöðu leiks, hver á að gera:*/
 
-.start{
-    -fx-background-color: #f6a2d9;
+.raudur{
+    -fx-background-color: #ffd7d7;
+    -fx-border-width: 5px 5px 1px 1px;
+    -fx-border-color: black;
 }
 
-.finish{
-    -fx-background-color: #9ff39f;
+.blar{
+    -fx-background-color: #d8f9ff;
+    -fx-border-width: 5px 5px 1px 1px;
+    -fx-border-color: black;
 }
 
-.reitur{
+.gulur{
+    -fx-background-color: #fffcc0;
+    -fx-border-width: 5px 5px 1px 1px;
+    -fx-border-color: black;
+}
+
+.svartur{
     -fx-background-color: #dddddd;
+    -fx-border-width: 5px 5px 1px 1px;
+    -fx-border-color: black;
+}
+
+.graenn{
+    -fx-background-color: #e1ffd3;
+    -fx-border-width: 5px 5px 1px 1px;
+    -fx-border-color: black;
+}
+
+.appelsina{
+    -fx-background-color: #ffd8b0;
+    -fx-border-width: 5px 5px 1px 1px;
+    -fx-border-color: black;
+}
+
+.fjolublar{
+    -fx-background-color: #e3d7fd;
+    -fx-border-width: 5px 5px 1px 1px;
+    -fx-border-color: black;
 }
 
 /*Rammar*/
@@ -91,12 +120,12 @@
 }
 
 .top_bottom{
-    -fx-border-width: 3px 1px 3px 1px;
+    -fx-border-width: 5px 1px 5px 1px;
     -fx-border-color: black;
 }
 
 .top{
-    -fx-border-width: 3px 1px 1px 1px;
+    -fx-border-width: 5px 1px 1px 1px;
     -fx-border-color: black;
 }
 
@@ -126,4 +155,56 @@
 .takki{
     -fx-padding: 10px 15px 10px 15px;
     -fx-font-size: 20px;
+}
+
+/*Hjálpar klasar fyrir útlit utan leiðar:*/
+
+.bigBorder1{
+    -fx-border-width: 5px 5px 0px 5px;
+    -fx-border-color: black;
+}
+
+.bigBorder2{
+    -fx-border-width: 5px 5px 5px 0px;
+    -fx-border-color: black;
+}
+
+.bigBorder3{
+    -fx-border-width: 0px 5px 5px 5px;
+    -fx-border-color: black;
+}
+
+.bigBorder4{
+    -fx-border-width: 0px 5px 5px 0px;
+    -fx-border-color: black;
+}
+
+.bigBorder5{
+    -fx-border-width: 0px 0px 5px 5px;
+    -fx-border-color: black;
+}
+
+.bigBorder6{
+    -fx-border-width: 5px 0px 0px 5px;
+    -fx-border-color: black;
+}
+
+.bigL{
+    -fx-border-width: 0px 0px 0px 5px;
+    -fx-border-color: black;
+}
+
+.bigR{
+    -fx-border-width: 0px 5px 0px 0px;
+    -fx-border-color: black;
+}
+
+.bigT{
+    -fx-border-width: 5px 0px 0px 0px;
+    -fx-border-color: black;
+}
+
+.bigB{
+    -fx-border-width: 0px 0px 5px 0px;
+    -fx-border-color: black;
 }

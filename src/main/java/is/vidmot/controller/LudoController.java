@@ -9,6 +9,8 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +22,6 @@ import java.util.Map;
  */
 public class LudoController implements GognInterface {
 
-
     //tilviksbreytur:
     @FXML
     public GridPane fxLeikBord;
@@ -30,6 +31,9 @@ public class LudoController implements GognInterface {
 
     @FXML
     public Label fxStada; //nafn leikmanns sem á að gera
+
+    @FXML
+    public VBox fxUpplysingar;  //Vbox í neðra hægra horni borðisns
 
     //Stigataflan:
     @FXML
@@ -50,8 +54,7 @@ public class LudoController implements GognInterface {
     private final SigurvegariDialog sigurvegariDialog = new SigurvegariDialog();
 
     //vinnslan:
-    private Ludo ludo = new Ludo(0);
-
+    private Ludo ludo;
 
     /**
      * Setja gögn, loada binding, setja lit sem var í fellivalmynd og byrjunar leikmann. Frumstilling og byrja leikinn.
@@ -59,15 +62,16 @@ public class LudoController implements GognInterface {
      * @throws IOException
      */
     public void setGogn(Object f, int i) throws IOException {
-        ludo = new Ludo(i);
         this.litur = f.toString();
+        ludo = new Ludo(i,litur);
         fxLeikmadur.setText(litur);
-        ludo.setLeikmadur1(litur);
 
         buaTilLeid();
         bindaTening();
         bindaReiti();
         bindaSkilabod();
+        bindaStig();
+        bindaLit();
     }
 
 
@@ -83,11 +87,13 @@ public class LudoController implements GognInterface {
      */
     public void onTeningur(ActionEvent actionEvent) {
         ludo.leikaLeik();
+
         if(ludo.getSamiReitur().get()) {
             tilkynning.birtaTilkynningu(((Node) actionEvent.getSource()).getScene().getWindow(), ludo.getLeikmadur().getNafn(), ludo.getAndstaedingur().getNafn());
         }
         if(ludo.erLokid().get()){
             sigurvegariDialog.birtaSigurvegara(((Node) actionEvent.getSource()).getScene().getWindow(), ludo, ludo.getLeikmadur().getNafn());
+            ludo.getStigatafla().uppfaeraStig(ludo.getLeikmadur());
         }
     }
 
@@ -174,10 +180,11 @@ public class LudoController implements GognInterface {
             fxTeningur.getStyleClass().remove(teningaMyndir[gamlaGildi.intValue() - 1]);
             fxTeningur.getStyleClass().add(teningaMyndir[nyttGildi.intValue() - 1]);
         });
+
     }
 
     /**
-     * Sæka lit sem var valinn í fellivalmynd og  skila css string til að binda við peð.
+     * Sækja lit sem var valinn í fellivalmynd og  skila css string til að binda við peð.
      * @return
      */
     private String litLeikmanns() {
@@ -228,6 +235,47 @@ public class LudoController implements GognInterface {
      */
     private void bindaSkilabod(){
         fxStada.textProperty().bind(ludo.naestiLeikmadurProp());
+    }
+
+    /**
+     * Bindir Label í stigatöflu við stig leikmanna frá vinnslunni
+     */
+    private void bindaStig(){
+        fxTolvaStig.textProperty().bind(ludo.getStigatafla().getStigTolvu());
+        fxLeikmadurStig.textProperty().bind(ludo.getStigatafla().getStigLeikmanns());
+    }
+
+    /**
+     * Hlustar á hvaða leikmaður á næsta leik
+     * uppfærir bakgrunnslit skilaboða
+     */
+    private void bindaLit(){
+        //frumstilling, stilla fyrsta gildið
+        if(fxUpplysingar.getStyleClass().size()==0){
+            fxUpplysingar.getStyleClass().add(bakgrunnslitur(ludo.naestiLeikmadurProp().getValue()));
+        }
+        ludo.naestiLeikmadurProp().addListener((obs, gamlaGildi, nyttGildi)->{
+            fxUpplysingar.getStyleClass().remove(bakgrunnslitur(gamlaGildi));
+            fxUpplysingar.getStyleClass().add(bakgrunnslitur(nyttGildi));
+        });
+    }
+
+    /**
+     * Tekur inn nafn næsta leikmanns og
+     * skilar css klasa fyrir bakgrunnslit skilaboða
+     * @param litur nafn leikmanns
+     * @return css klasa nafn
+     */
+    private String bakgrunnslitur(String litur){
+        return switch (litur) {
+            case "Gulur" -> "gulur";
+            case "Rauður" -> "raudur";
+            case "Grænn" -> "graenn";
+            case "Blár" -> "blar";
+            case "Fjólublár" -> "fjolublar";
+            case "Appelsínugulur" -> "appelsina";
+            default -> "svartur";
+        };
     }
 
 }
