@@ -87,6 +87,7 @@ public class LudoController implements GognInterface {
      */
     public void onTeningur(ActionEvent actionEvent) {
         ludo.leikaLeik();
+
         if(ludo.getSamiReitur().get()) {
             tilkynning.birtaTilkynningu(((Node) actionEvent.getSource()).getScene().getWindow(), ludo.getLeikmadur().getNafn(), ludo.getAndstaedingur().getNafn());
         }
@@ -179,6 +180,7 @@ public class LudoController implements GognInterface {
             fxTeningur.getStyleClass().remove(teningaMyndir[gamlaGildi.intValue() - 1]);
             fxTeningur.getStyleClass().add(teningaMyndir[nyttGildi.intValue() - 1]);
         });
+
     }
 
     /**
@@ -275,4 +277,5 @@ public class LudoController implements GognInterface {
             default -> "svartur";
         };
     }
+
 }

@@ -14,6 +14,9 @@ public class Ludo {
     //Index inn í fylki, næsti leikmaður sem á að gera
     private int naesti;
 
+    //Hver byrjaði seinasta leik
+    private int byrja;
+
     //Hæsta gildi, index á leiðinni, lengd leiðar -1
     private final int MAX = 35;
 
@@ -83,6 +86,7 @@ public class Ludo {
             leid.add(new Reitur(4,dalkur));
         }
         this.naesti = i;
+        this.byrja = i;
         this.naestiLeikmadur = new SimpleStringProperty(leikmenn[i].getNafn());
     }
 
@@ -257,6 +261,8 @@ public class Ludo {
      * Leikmenn og leikur settur í upphafsstöðu
      */
     public void nyrLeikur(){
+        this.naesti = (byrja+1)%leikmenn.length;
+        this.byrja = naesti;
         stada.set(Stada.GANGI);
         leikmenn[0].setReitur(0);
         leikmenn[1].setReitur(0);
