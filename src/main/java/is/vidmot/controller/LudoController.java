@@ -54,7 +54,7 @@ public class LudoController implements GognInterface {
     private final SigurvegariDialog sigurvegariDialog = new SigurvegariDialog();
 
     //vinnslan:
-    private Ludo ludo = new Ludo(0);
+    private Ludo ludo;
 
     /**
      * Setja gögn, loada binding, setja lit sem var í fellivalmynd og byrjunar leikmann. Frumstilling og byrja leikinn.
@@ -62,10 +62,9 @@ public class LudoController implements GognInterface {
      * @throws IOException
      */
     public void setGogn(Object f, int i) throws IOException {
-        ludo = new Ludo(i);
         this.litur = f.toString();
+        ludo = new Ludo(i,litur);
         fxLeikmadur.setText(litur);
-        ludo.setLeikmadur1(litur);
 
         buaTilLeid();
         bindaTening();
@@ -183,7 +182,7 @@ public class LudoController implements GognInterface {
     }
 
     /**
-     * Sæka lit sem var valinn í fellivalmynd og  skila css string til að binda við peð.
+     * Sækja lit sem var valinn í fellivalmynd og  skila css string til að binda við peð.
      * @return
      */
     private String litLeikmanns() {
@@ -249,6 +248,10 @@ public class LudoController implements GognInterface {
      * uppfærir bakgrunnslit skilaboða
      */
     private void bindaLit(){
+        //frumstilling, stilla fyrsta gildið
+        if(fxUpplysingar.getStyleClass().size()==0){
+            fxUpplysingar.getStyleClass().add(bakgrunnslitur(ludo.naestiLeikmadurProp().getValue()));
+        }
         ludo.naestiLeikmadurProp().addListener((obs, gamlaGildi, nyttGildi)->{
             fxUpplysingar.getStyleClass().remove(bakgrunnslitur(gamlaGildi));
             fxUpplysingar.getStyleClass().add(bakgrunnslitur(nyttGildi));
