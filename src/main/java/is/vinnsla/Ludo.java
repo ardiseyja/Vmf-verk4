@@ -21,7 +21,6 @@ public class Ludo {
     private final int MAX = 35;
 
     //Leikmenn
-    //Skoða betur með fyrri leikmann þegar hann á fyrsta leik, litur kemur ekki upp heldur birtist það sem stendur hér.
     private final Leikmadur[] leikmenn;
 
     //Lúdóborð
@@ -30,7 +29,7 @@ public class Ludo {
     //Teningur
     private final Teningur teningur = new Teningur();
 
-    //Stigatafla
+    //Stigatafla:
     private final Stigatafla stigatafla = new Stigatafla();
 
     //Heldur utan um hvort leikmaður lenti á sama reit og andstæðingurinn
@@ -51,6 +50,8 @@ public class Ludo {
     /**
      * Smiður, býr til leið, þ.e.
      * býr til lúdó-leiðina
+     * Skýrir leikmann notenda eftir litavali
+     * Stillir hvaða leikmaður byrjar
      */
     public Ludo(int i, String litur){
         leikmenn = new Leikmadur[] {new Leikmadur(litur), new Leikmadur("Svartur")};
@@ -88,15 +89,6 @@ public class Ludo {
         this.naesti = i;
         this.byrja = i;
         this.naestiLeikmadur = new SimpleStringProperty(leikmenn[i].getNafn());
-    }
-
-
-    /**
-     * Tekur við lit úr LudoController og setur hann á fyrsta leikmann.
-     * @param x
-     */
-    public void setLeikmadur1(String x) {   //mögulega óþarfa aðferð núna?
-        leikmenn[0] = new Leikmadur(x);
     }
 
 
@@ -148,7 +140,7 @@ public class Ludo {
      * segir til um hvort leikurinn sé í gangi
      * @return property
      */
-    public BooleanBinding iGangi(){     //mögulega óþarfa aðferð, aldrei notuð
+    public BooleanBinding iGangi(){
         return stada.isEqualTo(Stada.GANGI);
     }
 
@@ -160,6 +152,15 @@ public class Ludo {
     public BooleanBinding erLokid(){
         return stada.isEqualTo(Stada.LOKID);
     }
+
+    /**
+     * Skilar true er leikmaðurinn er tölva
+     * @return boolean
+     */
+    public boolean erTolva(){
+        return naestiLeikmadur.getValue().equals("Svartur");
+    }
+
 
     /**
      * Skilar property fyrir næsta leikmann
@@ -237,14 +238,29 @@ public class Ludo {
         return kominIMark();
     }
 
-
     //Aðalaðferðir:
 
     /**
-     * Kastar tening, færir leikmann, setur næsta leikmann
+     * Kastar tening, færir leikmann notenda, setur næsta leikmann
      * @return skilar true ef leik er lokið
      */
     public boolean leikaLeik() {
+        teningur.kasta();
+
+        if(faeraLeikmann()){
+            stada.set(Stada.LOKID);
+            return true;
+        }
+
+        setNaesti();
+        return false;
+    }
+
+    /**
+     * Kastar tening, færir leikmann tölvunnar, setur næsta leikmann
+     * @return skilar true ef leik er lokið
+     */
+    public boolean tolvaGerir(){
         teningur.kasta();
 
         if(faeraLeikmann()){
@@ -263,6 +279,7 @@ public class Ludo {
     public void nyrLeikur(){
         this.naesti = (byrja+1)%leikmenn.length;
         this.byrja = naesti;
+        naestiLeikmadur.set(leikmenn[naesti].getNafn());
         stada.set(Stada.GANGI);
         leikmenn[0].setReitur(0);
         leikmenn[1].setReitur(0);

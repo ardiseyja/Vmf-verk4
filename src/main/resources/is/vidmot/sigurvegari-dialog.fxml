@@ -17,7 +17,7 @@
          <children>
             <VBox alignment="CENTER" prefHeight="182.0" prefWidth="405.0">
                <children>
-                  <Label fx:id="fxSigurvegari" alignment="CENTER" contentDisplay="CENTER" text="">
+                  <Label fx:id="fxSigurvegari" alignment="CENTER" contentDisplay="CENTER" prefHeight="155.0" prefWidth="344.0" text="" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font name="System Bold" size="47.0" />
                      </font>
