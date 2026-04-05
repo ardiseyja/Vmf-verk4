@@ -25,7 +25,6 @@ import java.util.Map;
  * Controller fyrir leikborðið
  */
 public class LudoController implements GognInterface {
-
     //tilviksbreytur:
     @FXML
     public GridPane fxLeikBord;
@@ -34,12 +33,11 @@ public class LudoController implements GognInterface {
     public Button fxTeningur;
 
     @FXML
-    public Label fxStada; //nafn leikmanns sem á að gera
+    public Label fxStada;
 
     @FXML
-    public VBox fxUpplysingar;  //Vbox í neðra hægra horni borðisns
+    public VBox fxUpplysingar;
 
-    //Stigataflan:
     @FXML
     public Label fxTolvaStig;
 
@@ -49,8 +47,7 @@ public class LudoController implements GognInterface {
     @FXML
     public Label fxLeikmadur;
 
-    public String litur;
-
+    private String litur;
     private final Map<Reitur, StackPane> vidmotLeid = new HashMap<>();
 
     //Dialogar:
@@ -79,14 +76,11 @@ public class LudoController implements GognInterface {
         bindaSkilabod();
         bindaStig();
         bindaLit();
-        //Ef tölva byrjar
+
         if(ludo.erTolva()){
             tolvaGerir();
         }
     }
-
-
-    //Handlerar:
 
     /**
      * Handler fyrir tening
@@ -108,6 +102,7 @@ public class LudoController implements GognInterface {
     }
 
     //Hjálparaðferðir:
+
     /**
      * Ef leikmaður lendir á sama reit og andstæðingur birtist tilkynningar-dialog
      * @param actionEvent
@@ -149,8 +144,8 @@ public class LudoController implements GognInterface {
     }
 
     /**
-     * Bíður eftir að tölva gerir
-     * ÞEssi aðferð aðeins notuð þegar leikborðið er ræst í fyrsta skiptið
+     * Tölva gerir með pauseTransition
+     * Þessi aðferð er aðeins notuð þegar leikborðið er ræst í fyrsta skiptið
      */
     private void tolvaGerir(){
         pause.setOnFinished(e->{
@@ -161,7 +156,7 @@ public class LudoController implements GognInterface {
 
     /**
      * Býr til leiðina á lúdó borðinu
-     * Leiðin er fengin úr vinnslunni (módelinu). Viðmótsreitir (s) eru búnir til fyrir
+     * Leiðin er fengin úr vinnslunni. Viðmótsreitir (s) eru búnir til fyrir
      * hvern reit (r) og settur á borðið í viðmótinu.
      * (r, s) er bætt í HashMap vidmotLeid
      * @throws IOException ef viðmótsreiturinn er lesinn (load) úr .fxml skrá, annars óþarfi
@@ -306,21 +301,6 @@ public class LudoController implements GognInterface {
     }
 
     /**
-     * Hlustar á hvaða leikmaður á næsta leik
-     * uppfærir bakgrunnslit skilaboða
-     */
-    private void bindaLit(){
-        //frumstilling, stilla fyrsta gildið
-        if(fxUpplysingar.getStyleClass().size()==0){
-            fxUpplysingar.getStyleClass().add(bakgrunnslitur(ludo.naestiLeikmadurProp().getValue()));
-        }
-        ludo.naestiLeikmadurProp().addListener((obs, gamlaGildi, nyttGildi)->{
-            fxUpplysingar.getStyleClass().remove(bakgrunnslitur(gamlaGildi));
-            fxUpplysingar.getStyleClass().add(bakgrunnslitur(nyttGildi));
-        });
-    }
-
-    /**
      * Tekur inn nafn næsta leikmanns og
      * skilar css klasa fyrir bakgrunnslit skilaboða
      * @param litur nafn leikmanns
@@ -336,6 +316,21 @@ public class LudoController implements GognInterface {
             case "Appelsínugulur" -> "appelsina";
             default -> "svartur";
         };
+    }
+
+    /**
+     * Hlustar á hvaða leikmaður á næsta leik
+     * uppfærir bakgrunnslit skilaboða
+     */
+    private void bindaLit(){
+        //frumstilling, stilla fyrsta gildið
+        if(fxUpplysingar.getStyleClass().size()==0){
+            fxUpplysingar.getStyleClass().add(bakgrunnslitur(ludo.naestiLeikmadurProp().getValue()));
+        }
+        ludo.naestiLeikmadurProp().addListener((obs, gamlaGildi, nyttGildi)->{
+            fxUpplysingar.getStyleClass().remove(bakgrunnslitur(gamlaGildi));
+            fxUpplysingar.getStyleClass().add(bakgrunnslitur(nyttGildi));
+        });
     }
 
 }
