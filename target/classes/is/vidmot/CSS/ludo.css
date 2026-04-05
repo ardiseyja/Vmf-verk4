@@ -112,6 +112,33 @@
     -fx-border-color: black;
 }
 
+
+/*Bakgrunnslitir fyrir upphafsskjá þegar valinn er litur*/
+
+.uRaudur{
+    -fx-background-color: #ffd7d7;
+}
+
+.uBlar{
+    -fx-background-color: #d8f9ff;
+}
+
+.uGulur{
+    -fx-background-color: #fffcc0;
+}
+
+.uGraenn{
+    -fx-background-color: #e1ffd3;
+}
+
+.uAppelsina{
+    -fx-background-color: #ffd8b0;
+}
+
+.uFjolublar{
+    -fx-background-color: #e3d7fd;
+}
+
 /*Rammar*/
 
 .border{
