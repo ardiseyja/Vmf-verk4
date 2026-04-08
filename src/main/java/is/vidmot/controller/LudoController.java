@@ -14,80 +14,59 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
-/**
- * Controller fyrir leikborðið
- */
+/******************************************************************************
+ *  Lýsing  : Controller fyrir leikborðið.
+ *  Inniheldur handlera og aðferðir tengdum lúdó leiknum og leikborðinu.
+ *  Útfærir GognInterface
+ *****************************************************************************/
 public class LudoController implements GognInterface {
-    //tilviksbreytur:
-    @FXML
-    public GridPane fxLeikBord;
-
-    @FXML
-    public Button fxTeningur;
-
-    @FXML
-    public Label fxStada;
-
-    @FXML
-    public VBox fxUpplysingar;
-
-    @FXML
-    public Label fxTolvaStig;
-
-    @FXML
-    public Label fxLeikmadurStig;
-
-    @FXML
-    public Label fxLeikmadur;
+    @FXML private GridPane fxLeikBord;
+    @FXML private Button fxTeningur;
+    @FXML private Label fxStada;
+    @FXML private VBox fxUpplysingar;
+    @FXML private Label fxTolvaStig;
+    @FXML private Label fxLeikmadurStig;
+    @FXML private Label fxLeikmadur;
 
     private String litur;
     private final Map<Reitur, StackPane> vidmotLeid = new HashMap<>();
-
-    //Dialogar:
     private final Tilkynning tilkynning = new Tilkynning();
     private final SigurvegariDialog sigurvegariDialog = new SigurvegariDialog();
-
-    //vinnslan:
     private Ludo ludo;
-
-    //Pása:
-    PauseTransition pause = new PauseTransition(new Duration(1000));
+    private PauseTransition pause = new PauseTransition(new Duration(1000));
 
     /**
-     * Setja gögn, loada binding, setja lit sem var í fellivalmynd og byrjunar leikmann. Frumstilling og byrja leikinn.
-     * @param f
+     * Setjur gögn,tengir bindingar,
+     * fær lit sem valinn var í fellivalmynd og upplýsingar um hvaða leikmaður byrjar.
+     * Frumstillir leikborðið og byrja leikinn.
+     * @param f litur úr fellivalmynd
      * @throws IOException
      */
     public void setGogn(Object f, int i) throws IOException {
         this.litur = f.toString();
         ludo = new Ludo(i,litur);
         fxLeikmadur.setText(litur);
-
         buaTilLeid();
         bindaTening();
         bindaReiti();
         bindaSkilabod();
         bindaStig();
         bindaLit();
-
-        if(ludo.erTolva()){
-            tolvaGerir();
-        }
+        if(ludo.erTolva()){ tolvaGerir(); }
     }
 
     /**
      * Handler fyrir tening
-     * Þegar teningi er kastað færist leikmaður skv teningi
-     * Tölva gerir
+     * Þegar teningi er kastað færist leikmaður skv. teningi
+     * Tölva og notandi gera til skiptis
      * @param actionEvent
      */
+    @FXML
     public void onTeningur(ActionEvent actionEvent) {
         if(ludo.iGangi().getValue() && !ludo.erTolva() ){
             System.out.println("Notandi gerir");
@@ -104,7 +83,7 @@ public class LudoController implements GognInterface {
     //Hjálparaðferðir:
 
     /**
-     * Ef leikmaður lendir á sama reit og andstæðingur birtist tilkynningar-dialog
+     * Birtir tilkynninga-dialog þegar leikmaður lendir á sama reit og andstæðingur.
      * @param actionEvent
      */
     private void samiReitur(ActionEvent actionEvent){
@@ -114,7 +93,7 @@ public class LudoController implements GognInterface {
     }
 
     /**
-     * Ef leik er lokið er birtur sigurvegara-dialog
+     * Birtir sigurvegara-dialog ef leik er lokið.
      * @param actionEvent
      */
     private void sigurvegari(ActionEvent actionEvent){
@@ -122,14 +101,14 @@ public class LudoController implements GognInterface {
             Leikmadur sigurvegari = ludo.getLeikmadur();
             sigurvegariDialog.birtaSigurvegara(((Node) actionEvent.getSource()).getScene().getWindow(), ludo, sigurvegari.getNafn());
             ludo.getStigatafla().uppfaeraStig(sigurvegari);
-            if(ludo.erTolva()){
-                tolvaGerir();
-            }
+            if(ludo.erTolva()){ tolvaGerir(); }
         }
     }
 
     /**
      * Tölva gerir með pauseTransition
+     * Peð tölvu bíður í smá tíma áður en hann gerir
+     * til að auðveldlega sé hægt að fylgjast með framvindu leiksins.
      * @param actionEvent
      */
     private void tolvaGerir(ActionEvent actionEvent){
@@ -144,13 +123,13 @@ public class LudoController implements GognInterface {
     }
 
     /**
+     * Overload aðferð
      * Tölva gerir með pauseTransition
+     * til að auðveldlega sé hægt að fylgjast með framvindu leiksins.
      * Þessi aðferð er aðeins notuð þegar leikborðið er ræst í fyrsta skiptið
      */
     private void tolvaGerir(){
-        pause.setOnFinished(e->{
-            ludo.tolvaGerir();
-        });
+        pause.setOnFinished(e->{ ludo.tolvaGerir(); });
         pause.play();
     }
 
@@ -166,12 +145,9 @@ public class LudoController implements GognInterface {
         int i = 0;
         for(Reitur reitur: leid){
             StackPane vidmotsReitur = loadReitur();
+
             vidmotsReitur.getStyleClass().add("border");
-
-            if(i%2==0 && i!=0){
-                vidmotsReitur.getStyleClass().add("reitur");
-            }
-
+            if(i%2==0 && i!=0){ vidmotsReitur.getStyleClass().add("reitur"); }
             byrjunEndir(vidmotsReitur, reitur);
             aukaBorder(vidmotsReitur,reitur);
 
@@ -189,12 +165,9 @@ public class LudoController implements GognInterface {
     private void byrjunEndir(StackPane vidmotsReitur, Reitur reitur){
         int dalkur = reitur.getDalkurProp().intValue();
         int rod = reitur.getRodProp().intValue();
-        if(rod==3 && dalkur==0){
-            vidmotsReitur.getStyleClass().add("byrjun");
-        }
-        if(rod==4 && dalkur==4){
-            vidmotsReitur.getStyleClass().add("mark");
-        }
+
+        if(rod==3 && dalkur==0){ vidmotsReitur.getStyleClass().add("byrjun"); }
+        if(rod==4 && dalkur==4){ vidmotsReitur.getStyleClass().add("mark"); }
     }
 
     /**
@@ -206,16 +179,12 @@ public class LudoController implements GognInterface {
         int dalkur = reitur.getDalkurProp().intValue();
         int rod = reitur.getRodProp().intValue();
 
-        if(rod==4 && dalkur==0){
-            vidmotsReitur.getStyleClass().add("top");
-        }
-        if(rod==4 && (dalkur==1 || dalkur==2 || dalkur==3)){
-            vidmotsReitur.getStyleClass().add("top_bottom");
-        }
+        if(rod==4 && dalkur==0){ vidmotsReitur.getStyleClass().add("top"); }
+        if(rod==4 && (dalkur==1 || dalkur==2 || dalkur==3)){ vidmotsReitur.getStyleClass().add("top_bottom"); }
     }
 
     /**
-     * Hjálparaðferð sem býr til nýtt StackPane
+     * Býr til nýtt StackPane með fxmlLoader
      * @return StackPane viðmótsreit
      * @throws IOException
      */
@@ -226,7 +195,7 @@ public class LudoController implements GognInterface {
     }
 
     /**
-     * Bindir teningamyndir við teninginn
+     * Bindir teningamyndir við teninginn og
      * Teningur óvirkur á meðan tölva gerir
      */
     private void bindaTening(){
@@ -239,34 +208,23 @@ public class LudoController implements GognInterface {
     }
 
     /**
-     * Sækja lit sem var valinn í fellivalmynd og  skila css string til að binda við peð.
-     * @return
+     * Sækir lit sem var valinn í fellivalmynd og
+     * skilar css string til að binda við peð.
+     * @return Strengur
      */
     private String litLeikmanns() {
-        if(litur == "Gulur") {
-            return "leikmadurGulur";
-        }
-        if(litur == "Rauður") {
-            return "leikmadurRaudur";
-        }
-        if(litur == "Grænn") {
-            return "leikmadurGraenn";
-        }
-        if(litur == "Blár") {
-            return "leikmadurBlar";
-        }
-        if(litur == "Fjólublár") {
-            return "leikmadurFjolublar";
-        }
-        if(litur == "Appelsínugulur") {
-            return "leikmadurAppelsinu";
-        }
+        if(litur == "Gulur") { return "leikmadurGulur"; }
+        if(litur == "Rauður") { return "leikmadurRaudur"; }
+        if(litur == "Grænn") { return "leikmadurGraenn"; }
+        if(litur == "Blár") { return "leikmadurBlar"; }
+        if(litur == "Fjólublár") { return "leikmadurFjolublar"; }
+        if(litur == "Appelsínugulur") { return "leikmadurAppelsinu"; }
         return null;
     }
 
     /**
-     * Fyrir hvern leikmann, uppfærir mynd á viðmótsreit í samræmi við nýjan reit leikmanns sem
-     * er vaktaður í gegnum index leikmanns
+     * Fyrir hvern leikmann: uppfærir mynd á viðmótsreit í samræmi við nýjan reit leikmanns sem
+     * er vaktaður í gegnum index inn í fylki af css klösum leikmanna
      */
     private void bindaReiti(){
         String[] leikmadurStill = {litLeikmanns(), "leikmadurSvartur"};
@@ -304,7 +262,7 @@ public class LudoController implements GognInterface {
      * Tekur inn nafn næsta leikmanns og
      * skilar css klasa fyrir bakgrunnslit skilaboða
      * @param litur nafn leikmanns
-     * @return css klasa nafn
+     * @return Strengur
      */
     private String bakgrunnslitur(String litur){
         return switch (litur) {
@@ -319,11 +277,11 @@ public class LudoController implements GognInterface {
     }
 
     /**
-     * Hlustar á hvaða leikmaður á næsta leik
+     * Frumstillir bakgrunnslit
+     * Hlustar á breytingar um hvaða leikmaður á næsta leik
      * uppfærir bakgrunnslit skilaboða
      */
     private void bindaLit(){
-        //frumstilling, stilla fyrsta gildið
         if(fxUpplysingar.getStyleClass().size()==0){
             fxUpplysingar.getStyleClass().add(bakgrunnslitur(ludo.naestiLeikmadurProp().getValue()));
         }
@@ -332,5 +290,4 @@ public class LudoController implements GognInterface {
             fxUpplysingar.getStyleClass().add(bakgrunnslitur(nyttGildi));
         });
     }
-
 }
