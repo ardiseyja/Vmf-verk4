@@ -4,7 +4,6 @@ import is.vidmot.controller.GognInterface;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +13,7 @@ import java.util.Map;
  * <p>
  * EÞH - Breytt til að gera cache og controllers og að setja gögn eftir
  * að búið er að hlaða inn view
+ * Bætt við viðfangi, leikmaður, við switchTo aðferð
  */
 public class ViewSwitcher {
 

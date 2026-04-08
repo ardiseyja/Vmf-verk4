@@ -2,9 +2,10 @@ package is.vinnsla;
 
 import javafx.beans.property.SimpleStringProperty;
 
-/**
- * Klasi sem heldur utan um eiginleika stigatöflu
- */
+/******************************************************************************
+ *  Lýsing  : Eiginleikar stigatöflu
+ *  Geymir stig fyrir tvo leikmenn, notenda og tölvu.
+ *****************************************************************************/
 public class Stigatafla {
     private SimpleStringProperty stigLeikmanns = new SimpleStringProperty("0");
     private SimpleStringProperty stigTolvu = new SimpleStringProperty("0");
@@ -13,7 +14,7 @@ public class Stigatafla {
 
     /**
      * Skilar property fyrir stig notendans
-     * @return property
+     * @return SimpleStringproperty
      */
     public SimpleStringProperty getStigLeikmanns() {
         return stigLeikmanns;
@@ -21,7 +22,7 @@ public class Stigatafla {
 
     /**
      * Skilar property fyrir stig tölvu
-     * @return property
+     * @return SimpleStringproperty
      */
     public SimpleStringProperty getStigTolvu() {
         return stigTolvu;
@@ -30,7 +31,7 @@ public class Stigatafla {
     /**
      * Uppfærir stigatöflu
      * Bætir við einu stigi fyrir leikmanninn sem vann seinasta leik
-     * @param leikmadur sigurvegari
+     * @param leikmadur nafn sigurvegara
      */
     public void uppfaeraStig(Leikmadur leikmadur){
         if(leikmadur.getNafn() == "Svartur"){

@@ -2,10 +2,10 @@ package is.vinnsla;
 
 import javafx.beans.property.SimpleIntegerProperty;
 
-
-/**
- * Klasi sem geymir eiginleika reits, röð og dálk
- */
+/******************************************************************************
+ *  Lýsing  : Eiginleikar reits.
+ *  Geymir röð og dálk reits á leikborði
+ *****************************************************************************/
 public class Reitur {
     private SimpleIntegerProperty rod = new SimpleIntegerProperty();
     private SimpleIntegerProperty dalkur = new SimpleIntegerProperty();
@@ -20,31 +20,17 @@ public class Reitur {
         this.dalkur.set(dalkur);
     }
 
-
     /**
-     * Skilar röð reitarins
+     * Getter fyrir röð reits
+     * Skilar property fyrir röð reits
      * @return röð
      */
-    public SimpleIntegerProperty getRodProp() {return rod;}
+    public SimpleIntegerProperty getRodProp() { return rod; }
 
     /**
-     * skilar dálk reitarins
+     * Getter fyrir dálk reits.
+     * Skilar property fyrir dálk reitarins
      * @return dálkur
      */
-    public SimpleIntegerProperty getDalkurProp() {return dalkur;}
-
-
-    //Aðferðir fyrir prófun:
-    @Override
-    public String toString() {
-        return "Reitur{" +
-                "rod=" + rod +
-                ", dalkur=" + dalkur +
-                '}';
-    }
-
-    public static void main(String[] args){
-        Reitur r = new Reitur(1,3);
-        System.out.print(r);
-    }
+    public SimpleIntegerProperty getDalkurProp() { return dalkur; }
 }

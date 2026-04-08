@@ -6,94 +6,58 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import java.util.ArrayList;
 
-/**
- * Lúdó leikur, vinnsluklasinn sem viðmótið talar við
- */
+
+/******************************************************************************
+ *  Lýsing  : Eiginleikar Lúdó leiks.
+ *  Vinnsluklasi fyrir viðmótið
+ *  Geymir upplýsingar um leið leiksins, hver á leik, leikmenn, stöðu o.fl.
+ *****************************************************************************/
 public class Ludo {
-    //Index inn í fylki, næsti leikmaður sem á að gera:
-    private int naesti;
-
-    //Hver byrjaði seinasta leik:
-    private int byrja;
-
-    //Hæsta gildi, index á leiðinni, lengd leiðar -1:
-    private final int MAX = 35;
-
-    //Listi yfir leikmenn:
-    private final Leikmadur[] leikmenn;
-
-    //Lúdóborð:
-    private final ArrayList<Reitur> leid =  new ArrayList<>();
-
-    //Teningur:
+    private int naesti; //Index inn í fylki, næsti leikmaður sem á að gera:
+    private int byrja;  //Hver byrjaði seinasta leik
+    private final int MAX = 35; //Hæsta gildi, index á leiðinni, lengd leiðar -1
+    private final Leikmadur[] leikmenn; //Listi yfir leikmenn
+    private final ArrayList<Reitur> leid =  new ArrayList<>();   //Lúdóborð, leið leiksins
     private final Teningur teningur = new Teningur();
-
-    //Stigatafla:
     private final Stigatafla stigatafla = new Stigatafla();
-
-    //Heldur utan um hvort leikmaður lenti á sama reit og andstæðingurinn:
-    private SimpleBooleanProperty samiReitur = new SimpleBooleanProperty(false);
-
-    //Hvaða leikmaður á að gera næst:
-    private final SimpleStringProperty naestiLeikmadur;
-
-    //Staða leiksins:
-    private final SimpleObjectProperty<Stada> stada = new SimpleObjectProperty<>(Stada.GANGI);
-
+    private SimpleBooleanProperty samiReitur = new SimpleBooleanProperty(false);    //Heldur utan um hvort leikmaður lenti á sama reit og andstæðingurinn
+    private final SimpleStringProperty naestiLeikmadur;  //Hvaða leikmaður á að gera næst
+    private final SimpleObjectProperty<Stada> stada = new SimpleObjectProperty<>(Stada.GANGI);  //Staða leiksins
     enum Stada{
         GANGI,
         LOKID
     }
 
-
     /**
-     * Smiður, býr til leið, þ.e.
-     * býr til lúdó-leiðina
+     * Smiður
+     * Býr til leið
      * Skýrir leikmann notenda eftir litavali
      * Stillir hvaða leikmaður byrjar
+     * @param i index inn í fylki, hver byrjar
+     * @param litur litur notenda
      */
     public Ludo(int i, String litur){
-        leikmenn = new Leikmadur[] {new Leikmadur(litur), new Leikmadur("Svartur")};
-
-        for(int dalkur = 0; dalkur<4;dalkur++){
-            leid.add(new Reitur(3,dalkur));
-        }
-        for(int rod=2; rod>=0;rod--){
-            leid.add(new Reitur(rod,3));
-        }
+        for(int dalkur = 0; dalkur<4;dalkur++){ leid.add(new Reitur(3,dalkur)); }
+        for(int rod=2; rod>=0;rod--){ leid.add(new Reitur(rod,3)); }
         leid.add(new Reitur(0,4));
-        for(int rod = 0; rod<4; rod++){
-            leid.add(new Reitur(rod, 5));
-        }
-        for(int dalkur = 6; dalkur<9; dalkur++){
-            leid.add(new Reitur(3,dalkur));
-        }
+        for(int rod = 0; rod<4; rod++){ leid.add(new Reitur(rod, 5)); }
+        for(int dalkur = 6; dalkur<9; dalkur++){ leid.add(new Reitur(3,dalkur)); }
         leid.add(new Reitur(4,8));
-        for(int dalkur = 8;dalkur>4;dalkur--){
-            leid.add(new Reitur(5,dalkur));
-        }
-        for(int rod = 6; rod<9;rod++){
-            leid.add(new Reitur(rod, 5));
-        }
+        for(int dalkur = 8;dalkur>4;dalkur--){ leid.add(new Reitur(5,dalkur)); }
+        for(int rod = 6; rod<9;rod++){ leid.add(new Reitur(rod, 5)); }
         leid.add(new Reitur(8,4));
-        for(int rod=8;rod>4;rod--){
-            leid.add(new Reitur(rod, 3));
-        }
-        for(int dalkur=2; dalkur>=0;dalkur--){
-            leid.add(new Reitur(5, dalkur));
-        }
-        for(int dalkur = 0; dalkur<5; dalkur++){
-            leid.add(new Reitur(4,dalkur));
-        }
+        for(int rod=8;rod>4;rod--){ leid.add(new Reitur(rod, 3)); }
+        for(int dalkur=2; dalkur>=0;dalkur--){ leid.add(new Reitur(5, dalkur)); }
+        for(int dalkur = 0; dalkur<5; dalkur++){ leid.add(new Reitur(4,dalkur)); }
+
+        leikmenn = new Leikmadur[] {new Leikmadur(litur), new Leikmadur("Svartur")};
         this.naesti = i;
         this.byrja = i;
         this.naestiLeikmadur = new SimpleStringProperty(leikmenn[i].getNafn());
     }
 
-
-    //getters og setters:
-
     /**
+     * Getter fyrir leikmann
      * Skilar næsta leikmanni
      * @return Leikmaður
      */
@@ -102,6 +66,7 @@ public class Ludo {
     }
 
     /**
+     * Getter fyrir leikmann
      * Skilar leikmanni úr fylki eftir gefnu gildi
      * @param inx index heiltala
      * @return Leikmaður
@@ -111,7 +76,7 @@ public class Ludo {
     }
 
     /**
-     * Skilar leið leiksins
+     * Getter fyrir leið leiksins
      * @return Leið
      */
     public ArrayList getLeid(){
@@ -119,7 +84,7 @@ public class Ludo {
     }
 
     /**
-     * Skilar teningnum
+     * Getter fyrir tening
      * @return teningurinn
      */
     public Teningur getTeningur() {
@@ -127,7 +92,7 @@ public class Ludo {
     }
 
     /**
-     * Skilar stigatöflu
+     * Getter fyrir stigatöflu
      * @return stigatafla
      */
     public Stigatafla getStigatafla(){
@@ -135,8 +100,9 @@ public class Ludo {
     }
 
     /**
+     * Getter fyrir reit
      * Skilar Reit á leiðinni eftir gefnu gildi
-     * @param index inn í listann
+     * @param index inn í lista
      * @return Reitur
      */
     public Reitur getReitur(int index){
@@ -144,13 +110,15 @@ public class Ludo {
     }
 
     /**
+     * Getter fyrir samaReit
      * Skilar boolean property um hvort leikmaður lenti á sama reit
      * true ef leikmaður lenti á sama reit og andstæðingurinn
-     * @return property
+     * @return SimpleBooleanproperty
      */
     public SimpleBooleanProperty getSamiReitur(){ return samiReitur; }
 
     /**
+     * Getter fyrir andstæðing
      * Skilar andstæðingi núverandi leikmanns
      * @return Leikmadur
      */
@@ -160,24 +128,25 @@ public class Ludo {
 
     //Public hjálparaðferðir
     /**
-     * Skilar property gildi sem
-     * segir til um hvort leikurinn sé í gangi
-     * @return property
+     * Skilar gildi sem
+     * segir til um hvort leikur sé í gangi
+     * @return BooleanBinding
      */
     public BooleanBinding iGangi(){
         return stada.isEqualTo(Stada.GANGI);
     }
 
     /**
-     * Skilar property gildi sem
-     * segir til um hvort leikurinn sé lokinn
-     * @return property
+     * Skilar gildi sem
+     * segir til um hvort leik sé lokinn
+     * @return BooleanBinding
      */
     public BooleanBinding erLokid(){
         return stada.isEqualTo(Stada.LOKID);
     }
 
     /**
+     * Aðferð sem athugar hvort leikmaður sé tölva
      * Skilar true er leikmaðurinn er tölva
      * @return boolean
      */
@@ -187,18 +156,18 @@ public class Ludo {
 
     /**
      * Skilar property fyrir næsta leikmann
-     * @return næsti leikmaður
+     * @return SimpleStringProperty
      */
     public SimpleStringProperty naestiLeikmadurProp(){
         return naestiLeikmadur;
     }
 
     //Private hjálparaðferðir:
-
     /**
      * Athugar hvort leikmaður lenti á sama reit og fyrri leikmaður
+     * Skilar true ef leikmaður er á sama reit
      * @param reitur, index í lista
-     * @return true ef er á sama reit
+     * @return boolean
      */
     private boolean aSamaReit(int reitur){
         return leikmenn[(naesti+1)%leikmenn.length].getReitur() == reitur;
@@ -206,7 +175,8 @@ public class Ludo {
 
     /**
      * Segir til um hvort leikmaður sé kominn í mark
-     * @return boolean gildi
+     * Skilar true ef leikmaður er kominn í mark
+     * @return boolean
      */
     private boolean kominIMark(){
         return getLeikmadur().getReitur() == MAX;
@@ -221,9 +191,9 @@ public class Ludo {
     }
 
     /**
-     * færir leikmann eftir að teningi,
+     * Færir leikmann eftir að teningi,
      * færir andstæðing á byrjunarreit ef leikmaður lendir á sama reit
-     * Skilar gildi um hvort leikur sé í gangi
+     * Skilar gildi um hvort leikur sé í gangi, true ef í gangi
      * @return boolean
      */
     private boolean faeraLeikmann(){
@@ -239,7 +209,7 @@ public class Ludo {
     //Aðalaðferðir:
 
     /**
-     * Kastar tening, færir leikmann notenda, setur næsta leikmann
+     * Kastar tening, færir peð notenda, setur næsta leikmann
      * @return skilar true ef leik er lokið
      */
     public boolean leikaLeik() {
@@ -255,7 +225,7 @@ public class Ludo {
     }
 
     /**
-     * Kastar tening, færir leikmann tölvunnar, setur næsta leikmann
+     * Kastar tening, færir peð tölvunnar, setur næsta leikmann
      * @return skilar true ef leik er lokið
      */
     public boolean tolvaGerir(){

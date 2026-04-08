@@ -6,6 +6,9 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+/******************************************************************************
+ *  Lýsing  : Ræsir appið
+ *****************************************************************************/
 public class LudoApp extends javafx.application.Application {
     /**
      * Ræsir appið
@@ -17,7 +20,6 @@ public class LudoApp extends javafx.application.Application {
         var scene = new Scene(new Pane());
         ViewSwitcher.setScene(scene);
         ViewSwitcher.switchTo(View.ADAL, true, null, 0);
-
         stage.setTitle("Ludo");
         stage.setScene(scene);
         stage.show();

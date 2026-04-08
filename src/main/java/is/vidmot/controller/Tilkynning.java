@@ -4,29 +4,25 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.stage.Window;
-
 import java.io.IOException;
 
-/**
- * Klasi fyrir dialog sem tilkynnir
- * notenda að leikmaður hafi verið sendur aftur á byrjunarreit
- */
+/******************************************************************************
+ *  Lýsing  : Dialog sem tilkynnir notenda notenda
+ *  að leikmaður hafi verið sendur aftur á byrjunarreit
+ *****************************************************************************/
 public class Tilkynning {
-    //fastar:
     private static final String TILBAKA = " fer aftur á byrjunarreit";
     private static final String REITUR = " lenti á reit andstæðings";
     private static final String BYRJUNARREITUR = "Aftur á byrjunarreit";
     private static final String ILAGI ="Í lagi";
 
-    //tilviksbreytur
-    @FXML
-    private Label fxSkilabod;
-
-    @FXML
-    private Label fxTilkynning;
+    @FXML private Label fxSkilabod;
+    @FXML private Label fxTilkynning;
 
     /**
      * Birtir upplýsinga dialog þegar leikmaður er sendur aftur á byrjunarreit
+     * Tilkynnir hvaða leikmaður lenti á reit andstæðings og
+     * hvaða leikmaður var sendur aftur á byrjunarreit
      * @param owner window
      * @param leikmadur nafn leikmanns
      * @param andstaedingur nafn andstæðings
