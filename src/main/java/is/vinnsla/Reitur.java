@@ -3,6 +3,9 @@ package is.vinnsla;
 import javafx.beans.property.SimpleIntegerProperty;
 
 /******************************************************************************
+ *  Nafn    : Árdís Eyja Kjartansdóttir og Kristín Jónsdóttir
+ *  T-póstur: aek25@hi.is og krj63@hi.is
+ *
  *  Lýsing  : Eiginleikar reits.
  *  Geymir röð og dálk reits á leikborði
  *****************************************************************************/

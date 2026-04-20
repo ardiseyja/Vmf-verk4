@@ -20,6 +20,9 @@ import java.util.List;
 import java.util.Map;
 
 /******************************************************************************
+ * Nafn    : Árdís Eyja Kjartansdóttir og Kristín Jónsdóttir
+ * T-póstur: aek25@hi.is og krj63@hi.is
+ *
  *  Lýsing  : Controller fyrir leikborðið.
  *  Inniheldur handlera og aðferðir tengdum lúdó leiknum og leikborðinu.
  *  Útfærir GognInterface

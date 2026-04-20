@@ -4,6 +4,9 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 /******************************************************************************
+ *  Nafn    : Árdís Eyja Kjartansdóttir og Kristín Jónsdóttir
+ *  T-póstur: aek25@hi.is og krj63@hi.is
+ *
  *  Lýsing  : Eiginleikar leikmanns, geymir nafn og reit leikmanns
  *****************************************************************************/
 public class Leikmadur {

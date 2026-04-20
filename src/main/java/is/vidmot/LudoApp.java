@@ -7,6 +7,9 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /******************************************************************************
+ *  Nafn    : Árdís Eyja Kjartansdóttir og Kristín Jónsdóttir
+ *  T-póstur: aek25@hi.is og krj63@hi.is
+ *
  *  Lýsing  : Ræsir appið
  *****************************************************************************/
 public class LudoApp extends javafx.application.Application {

@@ -8,6 +8,9 @@ import javafx.stage.Window;
 import java.io.IOException;
 
 /******************************************************************************
+ *  Nafn    : Árdís Eyja Kjartansdóttir og Kristín Jónsdóttir
+ *  T-póstur: aek25@hi.is og krj63@hi.is
+ *
  *  Lýsing  : Dialog sem tilkynnir notenda hver vann leikinn.
  *  Inniheldur takka til að hefja nýjan leik.
  *****************************************************************************/

@@ -5,6 +5,9 @@ import javafx.beans.property.SimpleIntegerProperty;
 import java.util.Random;
 
 /******************************************************************************
+ *  Nafn    : Árdís Eyja Kjartansdóttir og Kristín Jónsdóttir
+ *  T-póstur: aek25@hi.is og krj63@hi.is
+ *
  *  Lýsing  : Eiginleikar Tenings.
  *  Geymir tölu tenings og hefur aðferð til að kasta tening.
  *****************************************************************************/

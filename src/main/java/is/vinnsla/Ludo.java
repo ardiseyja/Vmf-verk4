@@ -8,6 +8,9 @@ import java.util.ArrayList;
 
 
 /******************************************************************************
+ *  Nafn    : Árdís Eyja Kjartansdóttir og Kristín Jónsdóttir
+ *  T-póstur: aek25@hi.is og krj63@hi.is
+ *
  *  Lýsing  : Eiginleikar Lúdó leiks.
  *  Vinnsluklasi fyrir viðmótið
  *  Geymir upplýsingar um leið leiksins, hver á leik, leikmenn, stöðu o.fl.
@@ -37,19 +40,7 @@ public class Ludo {
      * @param litur litur notenda
      */
     public Ludo(int i, String litur){
-        for(int dalkur = 0; dalkur<4;dalkur++){ leid.add(new Reitur(3,dalkur)); }
-        for(int rod=2; rod>=0;rod--){ leid.add(new Reitur(rod,3)); }
-        leid.add(new Reitur(0,4));
-        for(int rod = 0; rod<4; rod++){ leid.add(new Reitur(rod, 5)); }
-        for(int dalkur = 6; dalkur<9; dalkur++){ leid.add(new Reitur(3,dalkur)); }
-        leid.add(new Reitur(4,8));
-        for(int dalkur = 8;dalkur>4;dalkur--){ leid.add(new Reitur(5,dalkur)); }
-        for(int rod = 6; rod<9;rod++){ leid.add(new Reitur(rod, 5)); }
-        leid.add(new Reitur(8,4));
-        for(int rod=8;rod>4;rod--){ leid.add(new Reitur(rod, 3)); }
-        for(int dalkur=2; dalkur>=0;dalkur--){ leid.add(new Reitur(5, dalkur)); }
-        for(int dalkur = 0; dalkur<5; dalkur++){ leid.add(new Reitur(4,dalkur)); }
-
+        buaTilLeid();
         leikmenn = new Leikmadur[] {new Leikmadur(litur), new Leikmadur("Svartur")};
         this.naesti = i;
         this.byrja = i;
@@ -163,6 +154,24 @@ public class Ludo {
     }
 
     //Private hjálparaðferðir:
+
+    /**
+     * Býr til leið lúdó leiksins
+     */
+    private void buaTilLeid(){
+        for(int dalkur = 0; dalkur<4;dalkur++){ leid.add(new Reitur(3,dalkur)); }
+        for(int rod=2; rod>=0;rod--){ leid.add(new Reitur(rod,3)); }
+        leid.add(new Reitur(0,4));
+        for(int rod = 0; rod<4; rod++){ leid.add(new Reitur(rod, 5)); }
+        for(int dalkur = 6; dalkur<9; dalkur++){ leid.add(new Reitur(3,dalkur)); }
+        leid.add(new Reitur(4,8));
+        for(int dalkur = 8;dalkur>4;dalkur--){ leid.add(new Reitur(5,dalkur)); }
+        for(int rod = 6; rod<9;rod++){ leid.add(new Reitur(rod, 5)); }
+        leid.add(new Reitur(8,4));
+        for(int rod=8;rod>4;rod--){ leid.add(new Reitur(rod, 3)); }
+        for(int dalkur=2; dalkur>=0;dalkur--){ leid.add(new Reitur(5, dalkur)); }
+        for(int dalkur = 0; dalkur<5; dalkur++){ leid.add(new Reitur(4,dalkur)); }
+    }
     /**
      * Athugar hvort leikmaður lenti á sama reit og fyrri leikmaður
      * Skilar true ef leikmaður er á sama reit

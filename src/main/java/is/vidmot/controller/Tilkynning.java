@@ -7,6 +7,9 @@ import javafx.stage.Window;
 import java.io.IOException;
 
 /******************************************************************************
+ *  Nafn    : Árdís Eyja Kjartansdóttir og Kristín Jónsdóttir
+ *  T-póstur: aek25@hi.is og krj63@hi.is
+ *
  *  Lýsing  : Dialog sem tilkynnir notenda notenda
  *  að leikmaður hafi verið sendur aftur á byrjunarreit
  *****************************************************************************/

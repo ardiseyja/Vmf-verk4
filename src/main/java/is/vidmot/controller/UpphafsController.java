@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.util.Random;
 
 /******************************************************************************
+ *  Nafn    : Árdís Eyja Kjartansdóttir og Kristín Jónsdóttir
+ *  T-póstur: aek25@hi.is og krj63@hi.is
+ *
  *  Lýsing  : Controller fyrir upphafsskjá forritsins.
  *  Tekur við upplýsingum um leik og vinnur úr þeim áður en leikur er hafinn.
  *****************************************************************************/
